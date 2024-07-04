@@ -5,6 +5,9 @@ import { TableModule } from 'primeng/table';
 import { CommonModule, DatePipe } from '@angular/common';
 import { DataFormatadaPipe } from '../pipes/data-formatada.pipe';
 import { AlunoService } from '../services/aluno.service';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
+import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +17,10 @@ import { AlunoService } from '../services/aluno.service';
     TableModule,
     CommonModule,
     DatePipe,
-    DataFormatadaPipe
+    DataFormatadaPipe,
+    IconFieldModule,
+    InputIconModule,
+    InputTextModule
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'

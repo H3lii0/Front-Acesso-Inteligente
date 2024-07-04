@@ -1,0 +1,16 @@
+.pesquisar {
+    margin: 30px;
+}
+input {
+    border-radius: 20px;
+}
+
+button {
+    width: calc(100% - 130px);
+    position: absolute;
+    right: 30px;
+    margin-right: 10px;
+    border-radius: 20px;
+    padding: 10px;
+    z-index: 10;
+}
