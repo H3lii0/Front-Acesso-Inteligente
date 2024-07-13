@@ -1,35 +1,38 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Aluno } from './models/aluno.model';
-import { TableModule } from 'primeng/table';
-import { CommonModule, DatePipe } from '@angular/common';
-import { DataFormatadaPipe } from './pipes/data-formatada.pipe';
-import { AlunoService } from './services/aluno.service';
+import { CommonModule } from '@angular/common';
+import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
+import { NgxLoadingModule } from 'ngx-loading';
+
+
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
     RouterOutlet,
-    TableModule,
     CommonModule,
-    DatePipe,
-    DataFormatadaPipe
+    NgxSpinnerModule,
+    NgxLoadingModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent  implements OnInit{
   title = 'acesso-inteligente';
-  alunos: Aluno[] = [];
-  constructor (public alunoService: AlunoService) {
+  public loading = false;
 
-  }
+  constructor (
+    private spinner: NgxSpinnerService
+  ) {}
 
   ngOnInit(): void {
-    this.alunoService.getAluno().subscribe(response => {
-      this.alunos = response
-      console.log(this.alunos)
-    })
+    this.loading = true;
+    // this.spinner.show();
+
+    setTimeout(() => {
+      // this.spinner.hide();
+      this.loading = false
+    }, 3000);
   }
 }

@@ -1,41 +1,54 @@
 <div class="pesquisar">
-    <p-iconField iconPosition="left">
-        <p-inputIcon styleClass="pi pi-search" />
-        <input type="text" pInputText placeholder="Pesquisar aluno" />
-        <button class="botao">Pequisar aluno</button>
-    </p-iconField>
+    <form (ngSubmit)="buscarAluno()" [formGroup]="buscarAlunoForm">
+        <p-iconField iconPosition="left">
+            <p-inputIcon styleClass="pi pi-search" />
+            <input type="text" pInputText placeholder="Pesquisar aluno" formControlName="id" />
+            <button type="submit" class="botao">Pesquisar aluno</button>
+        </p-iconField>
+    </form>
+    <div class="img">
+        <img src="../../assets/img/PowerTrace.png" alt="">
+    </div>
+    <div class="img">
+        <img src="../../assets/img/PowerTrace (1).png" alt="">
+    </div>
 </div>
 
+<p-dialog header="Detalhes do Aluno" [modal]="true" [(visible)]="alunoDialog" [style]="{ width: '450px' }">
+    <div class="container">
+        <p-card *ngIf="aluno" header="Advanced Card" subheader="Card Subheader">
+            <ng-template pTemplate="header">
+                <img alt="Card" [src]="aluno.imagem" style="height: 300px;">
+            </ng-template>
+            <div class="card">
+                <p>ID: {{ aluno.id }}</p>
+                <p>Matricula: {{ aluno.matricula }}</p>
+                <p>Nome: {{ aluno.nome }}</p>
+                <p>Gênero: {{ aluno.sexo }}</p>
+                <p>Série: {{ aluno.serie }}</p>
+                <p>Curso: {{ aluno.curso }}</p>
+            </div>
+            <ng-template pTemplate="footer">
+                <div style="display: flex; justify-content: center;">
+                    <p-button label="Senha" (onClick)="showSenhaDialog()" />
+                </div>
+            </ng-template>
+        </p-card>
+    </div>
+</p-dialog>
 
-<div class="card">
-    <p-table [value]="alunos" [tableStyle]="{ 'min-width': '50rem' }">
-        <ng-template pTemplate="header">
-            <tr>
-                <th>Matricula</th>
-                <th>Nome</th>
-                <th>Data de Nascimento</th>
-                <th>Sexo</th>
-                <th>Serie</th>
-                <th>Curso</th>
-                <th>Email</th>
-                <th>Telefone</th>
-            </tr>
-        </ng-template>
-        <ng-template  pTemplate="body" let-product>
-            <tr *ngFor="let aluno of alunos">
-                <td>{{ aluno.matricula }}</td>
-                <td>{{ aluno.nome }}</td>
-                <td>{{ aluno.data_nascimento | dataFormatada }}</td>
-                <td>{{ aluno.sexo }}</td>
-                <td>{{ aluno.serie }}</td>
-                <td>{{ aluno.curso }}</td>
-                <td>{{ aluno.email }}</td>
-                <td>{{ aluno.telefone }}</td>
-            </tr>
-        </ng-template>
-        <li>asdasd</li>
-    </p-table>
-</div>
+<p-dialog header="Confirmar dados" [modal]="true" [(visible)]="senhaDialog" [style]="{ width: '25rem' }">
+    <span class="p-text-secondary block mb-5">Informe a senha para continuar.</span>
+    <div class="flex align-items-center gap-3 mb-5">
+        <label for="senha" class="font-semibold w-6rem">Senha:</label>
+        <input type="password" pInputText id="senha" class="flex-auto" autocomplete="off" [(ngModel)]="senha" (keydown.enter)="confirmarSenha()" />
+    </div>
+    <div class="flex justify-content-end gap-2">
+        <p-button label="Cancelar" (onClick)="senhaDialog = false" severity="secondary" />
+        <p-button label="Confirmar" (onClick)="confirmarSenha()" />
+    </div>
+</p-dialog>
 
-
-
+<script>
+    document.addEventListener('keydown' )
+</script>

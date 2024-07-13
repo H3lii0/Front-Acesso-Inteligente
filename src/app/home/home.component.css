@@ -1,16 +1,39 @@
-.pesquisar {
-    margin: 30px;
+body {
+    background-color: rgb(61, 63, 63);
 }
-input {
-    border-radius: 20px;
+.pesquisar {
+    display: flex;
+    justify-content: space-evenly;
 }
 
-button {
-    width: calc(100% - 130px);
+.pesquisar {
+    margin: 30px;
+    max-width: 100%;
+    position: relative;
+}
+
+form {
+    display: flex;
+    align-items: center;
+}
+
+.img img{
+    width: 500px;
+    border-radius: 5px;
+}
+
+.pesquisar input {
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    border: 1px solid rgb(8, 8, 8);
+    width: 100%;
+}
+
+.pesquisar button {
+    border: 1px solid rgb(158, 158, 158);
+    border-radius: 25px;
     position: absolute;
-    right: 30px;
-    margin-right: 10px;
-    border-radius: 20px;
-    padding: 10px;
-    z-index: 10;
+    top: -15px;
+    right: 3px;
+    height: 245%;
 }

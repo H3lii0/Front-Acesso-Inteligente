@@ -9,4 +9,5 @@ export interface Aluno {
     email: string;
     telefone: string;
     imagem?: string;
+    senha: string;
 }

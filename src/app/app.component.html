@@ -1,2 +1,7 @@
-
+<ngx-spinner bdColor = "rgba(5, 5, 3, 234)" color = "#fff"  [fullScreen] = "true" template="<img src='https://img1.picmix.com/output/stamp/normal/0/9/0/4/1604090_a14a5.gif'>"><p style=" font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-weight: 800; color: rgb(255, 255, 255)"  > Loading... </p></ngx-spinner>
+<ngx-loading
+    [show]="loading"
+    [config]="{  backdropBorderRadius: '3px',backdropBackgroundColour: 'rgba(5, 5, 3, 234)' 
+}"
+  ></ngx-loading>
 <router-outlet />

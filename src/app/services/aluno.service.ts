@@ -10,7 +10,7 @@ export class AlunoService {
 
   apiUrl = "http://127.0.0.1:8000/api/"
 
-  httOptions = {
+  httpOptions = {
     headers:  new HttpHeaders({
       'Content-Type': 'application/json'
     })
@@ -18,6 +18,14 @@ export class AlunoService {
   constructor(private http: HttpClient) { }
 
   public getAluno (): Observable<Aluno[]> {
-    return this.http.get<Aluno[]>(`${this.apiUrl}aluno`, this.httOptions)
+    return this.http.get<Aluno[]>(`${this.apiUrl}aluno`, this.httpOptions)
+  }
+
+  public getAlunoId (id: number): Observable<Aluno> {
+    return this.http.get<Aluno>(`${this.apiUrl}aluno/${id}`, this.httpOptions)
+  }
+
+  public validarSenha (id: number, senha: string): Observable<{acessoPermitido: boolean}>{
+    return this.http.post<{ acessoPermitido: boolean }>(`${this.apiUrl}aluno/${id}/validar-senha`, {senha}, this.httpOptions)
   }
 }
