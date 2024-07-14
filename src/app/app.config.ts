@@ -6,8 +6,9 @@ import { routes } from './app.routes';
 import { DatePipe } from '@angular/common';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgxLoadingModule } from 'ngx-loading';
+import { MessageService } from 'primeng/api';
 
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), provideHttpClient(), DatePipe, importProvidersFrom(BrowserAnimationsModule), NgxSpinnerModule, NgxLoadingModule ]
+  providers: [provideRouter(routes), provideHttpClient(), DatePipe, importProvidersFrom(BrowserAnimationsModule), NgxSpinnerModule, NgxLoadingModule, MessageService ]
 };

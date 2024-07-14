@@ -1,5 +1,29 @@
-body {
-    background-color: rgb(61, 63, 63);
+.cabecalho {
+    display: flex;
+    justify-content: space-evenly;
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+}
+
+.cabecalho a {
+    text-decoration: none;
+    color: white;
+    font-size: 1rem;
+}
+
+.cabecalho a:hover {
+    color: gray;
+}
+
+.cabecalho-menu {
+    display: flex;
+    gap: 100px;
+}
+
+h1 {
+    font-family: "Poppins", sans-serif;
+    font-size: 4rem;
+    color: white;
 }
 .pesquisar {
     display: flex;
@@ -7,9 +31,10 @@ body {
 }
 
 .pesquisar {
-    margin: 30px;
+    margin: 20px;
     max-width: 100%;
     position: relative;
+
 }
 
 form {
@@ -17,23 +42,33 @@ form {
     align-items: center;
 }
 
-.img img{
-    width: 500px;
+.imagem-base img {
+    width: 300px;
+    margin-top: 30px;
+    margin-right: -140px;
+    border-radius: 5px;
+}
+
+.imagem-base-2 img {
+    width: 300px;
+    margin-top: 170px;
+    margin-left: -140px;
     border-radius: 5px;
 }
 
 .pesquisar input {
     padding: 1rem 2rem;
     border-radius: 50px;
-    border: 1px solid rgb(8, 8, 8);
+    border: 1px solid rgb(201, 200, 200);
     width: 100%;
 }
 
 .pesquisar button {
-    border: 1px solid rgb(158, 158, 158);
+    border: 1px solid rgb(190, 188, 188);
     border-radius: 25px;
     position: absolute;
     top: -15px;
     right: 3px;
     height: 245%;
+    font-family: "Poppins", sans-serif;
 }

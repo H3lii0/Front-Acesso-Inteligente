@@ -12,27 +12,23 @@ import { NgxLoadingModule } from 'ngx-loading';
   imports: [
     RouterOutlet,
     CommonModule,
-    NgxSpinnerModule,
-    NgxLoadingModule
+    NgxSpinnerModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent  implements OnInit{
   title = 'acesso-inteligente';
-  public loading = false;
 
   constructor (
     private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit(): void {
-    this.loading = true;
-    // this.spinner.show();
+    this.spinner.show();
 
     setTimeout(() => {
-      // this.spinner.hide();
-      this.loading = false
-    }, 3000);
+      this.spinner.hide();
+    }, 2000);
   }
 }

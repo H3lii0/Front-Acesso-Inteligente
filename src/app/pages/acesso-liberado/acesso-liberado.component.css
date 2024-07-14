@@ -1,11 +1,149 @@
-div {
+.container {
     display: flex;
     justify-content: center;
-    margin-top: 50px;
+    margin: 50px;
 }
 
-img {
+.painel-detalhe {
+    display: flex;
+    justify-content: center;
+    width: 60%;
+    height: 800px;
+    background: white;
+    border: 1px solid gray;
     border-radius: 25px;
-    width: 500px;
-    height: 500px;
+}
+
+.flex {
+    margin-left: 50px;
+    align-items: center;
+}
+
+.info {
+    margin: 100px;
+    width: 100%;
+}
+
+#container {
+    position: relative;
+    width: 350px;
+    height: 350px;
+    margin: auto;
+
+}
+
+#container svg {
+    transform-origin: center;
+    animation: scale 0.25s ease-out forwards;
+    animation-delay: 3s;
+}
+
+#container circle {
+    fill: transparent;
+    stroke: #4caf50;
+    stroke-width: 5;
+    stroke-dasharray: 283;
+    stroke-dashoffset: 283;
+    stroke-linecap: round;
+    animation: progress 0.5s ease-out forwards;
+    transform: rotate(-90deg);
+    transform-origin: center;
+    animation-delay: 2.5s;
+}
+
+.checkmark {
+    fill: none;
+    stroke: #fff;
+    stroke-width: 10;
+    stroke-dasharray: 75;
+    stroke-dashoffset: 75;
+    animation: checkmark 0.25s ease-out forwards;
+    animation-delay: 3s;
+}
+
+@keyframes progress {
+    0% {
+        fill: transparent;
+        stroke-dashoffset: 283;
+    }
+
+    99% {
+        fill: transparent;
+    }
+
+    100% {
+        fill: #4caf50;
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes checkmark {
+    0% {
+        stroke-dashoffset: 75;
+    }
+
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes scale {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.texto-animado {
+    text-align: center;
+}
+
+.animated-text {
+    font-size: 3rem;
+    color: #4caf50;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 1s ease-out forwards;
+    animation-delay: 3s;
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media only screen and (max-width: 1366px) {
+    *{
+        top: 0;
+    }
+    .container {
+        display: flex;
+        justify-content: center;
+        margin: 25px;
+        height: 0;
+        transform: scaleY(0.7);
+    }
+    .painel-detalhe {
+        display: flex;
+        justify-content: center;
+        width: 80%;
+        height: 800px;
+        background: white;
+        border: 1px solid gray;
+        border-radius: 25px;
+        transform: scaleX(0.79);
+    }
 }

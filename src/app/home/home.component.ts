@@ -62,7 +62,7 @@ export class HomeComponent {
     const id = this.buscarAlunoForm.get('id')?.value;
     this.alunoService.getAlunoId(id).subscribe(data => {
       this.aluno = data;
-      this.alunoDialog= true
+      this.alunoDialog = true
     })
   }
   
@@ -80,11 +80,10 @@ export class HomeComponent {
     this.alunoService.validarSenha(id, this.senha).subscribe(
       response => {
         if (response.acessoPermitido) {
-          this.router.navigate(['/acesso-liberado'])
+          this.router.navigate(['/acesso-liberado', {id: id}] )
         } else {
           alert('Senha incorreta, tente novamente.');
         }
-        console.log(this.senha)
       }
     );
   }

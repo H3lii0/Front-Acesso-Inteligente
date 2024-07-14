@@ -1,36 +1,44 @@
+<div class="cabecalho">
+    <a href="">Home</a>
+    <nav class="cabecalho-menu">
+        <a href="">News</a>
+        <a href="">Sobre</a>
+        <a href="">Contato</a>
+    </nav>
+    <div class="login">
+        <a href="">Login</a>
+    </div>
+</div>
 <div class="pesquisar">
     <form (ngSubmit)="buscarAluno()" [formGroup]="buscarAlunoForm">
-        <p-iconField iconPosition="left">
-            <p-inputIcon styleClass="pi pi-search" />
-            <input type="text" pInputText placeholder="Pesquisar aluno" formControlName="id" />
-            <button type="submit" class="botao">Pesquisar aluno</button>
-        </p-iconField>
+        <div class="ok">
+            <h1>Portal de acesso</h1>
+            <p-iconField iconPosition="left">
+                <p-inputIcon styleClass="pi pi-search" />
+                <input type="text" pInputText placeholder="Digite o número de identificação" formControlName="id" />
+                <button type="submit" class="botao">Pesquisar aluno</button>
+            </p-iconField>
+        </div>
     </form>
-    <div class="img">
-        <img src="../../assets/img/PowerTrace.png" alt="">
+    <div class="imagem-base">
+        <img src="../../assets/img/student_boy.png" alt="">
     </div>
-    <div class="img">
-        <img src="../../assets/img/PowerTrace (1).png" alt="">
+    <div class="imagem-base-2">
+        <img src="../../assets/img/student_girl.png" alt="">
     </div>
 </div>
 
 <p-dialog header="Detalhes do Aluno" [modal]="true" [(visible)]="alunoDialog" [style]="{ width: '450px' }">
     <div class="container">
-        <p-card *ngIf="aluno" header="Advanced Card" subheader="Card Subheader">
-            <ng-template pTemplate="header">
-                <img alt="Card" [src]="aluno.imagem" style="height: 300px;">
-            </ng-template>
+        <p-card *ngIf="aluno" header="{{ aluno.nome }}">
             <div class="card">
-                <p>ID: {{ aluno.id }}</p>
-                <p>Matricula: {{ aluno.matricula }}</p>
-                <p>Nome: {{ aluno.nome }}</p>
-                <p>Gênero: {{ aluno.sexo }}</p>
                 <p>Série: {{ aluno.serie }}</p>
                 <p>Curso: {{ aluno.curso }}</p>
+                <p>Gênero: {{ aluno.sexo }}</p>
             </div>
             <ng-template pTemplate="footer">
                 <div style="display: flex; justify-content: center;">
-                    <p-button label="Senha" (onClick)="showSenhaDialog()" />
+                    <p-button label="Confimar acesso" (onClick)="showSenhaDialog()" />
                 </div>
             </ng-template>
         </p-card>

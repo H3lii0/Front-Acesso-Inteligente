@@ -1,1 +1,29 @@
-<div><img src="https://i.pinimg.com/originals/70/a5/52/70a552e8e955049c8587b2d7606cd6a6.gif" alt=""></div>
+<div class="container">
+    <div class="painel-detalhe">
+        <div class="card flex justify-content-start oi">
+            <p-card *ngIf="aluno" header="{{ aluno.nome }}" [style]="{ width: '360px' }">
+                <ng-template pTemplate="header" style="border-radius: 10px !important;">
+                    <p-image [src]="aluno.imagem" alt="Image" [preview]="true" />
+                </ng-template>
+                <p>Matricula: {{ aluno.matricula }}</p>
+                <p>Série: {{ aluno.serie }}</p>
+                <p>Curso: {{ aluno.curso }}</p>
+                <p>Telefone: {{ aluno.telefone }}</p>
+                <p>Data Nascimento: {{ aluno.data_nascimento | dataFormatada}}</p>
+                <p>E-mail: {{ aluno.email }}</p>
+
+            </p-card>
+        </div>
+        <div class="info">
+                <div id="container">
+                    <svg viewBox="0 0 100 100">
+                        <circle cx="50" cy="50" r="45" />
+                        <path class="checkmark" d="M 25 50 L 43 68 L 75 32" />
+                    </svg>
+                </div>
+                <div class="texto-animado">
+                   <h1 class="animated-text">Acesso confirmado!</h1>
+                </div>
+            </div>
+    </div>
+</div>
