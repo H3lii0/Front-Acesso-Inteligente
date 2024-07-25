@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { Aluno } from '../models/aluno.model';
 import { TableModule } from 'primeng/table';
 import { CommonModule, DatePipe } from '@angular/common';
@@ -8,7 +8,6 @@ import { AlunoService } from '../services/aluno.service';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { InputTextModule } from 'primeng/inputtext';
-
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
@@ -30,7 +29,8 @@ import { DialogModule } from 'primeng/dialog';
     ReactiveFormsModule,
     ButtonModule,
     CardModule,
-    DialogModule
+    DialogModule,
+    RouterLink
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
