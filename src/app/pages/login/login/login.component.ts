@@ -27,8 +27,7 @@ constructor(
   login(event: Event) {
     event.preventDefault();
     this.authService.login({email: this.email, password: this.password}).subscribe(() => {
-      alert('Login realizado com sucesso!')
-      this.router.navigate(['dashboard'])
+      this.router.navigate(['/dashboard'])
     }) 
   }
 }
