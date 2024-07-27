@@ -1,6 +1,6 @@
-<div class="container">
+<div class="card-perfil">
     <div class="painel-detalhe">
-        <div class="card flex justify-content-start oi">
+        <div class="flex justify-content-start">
             <p-card *ngIf="aluno" header="{{ aluno.nome }}" [style]="{ width: '360px' }">
                 <ng-template pTemplate="header" style="border-radius: 10px !important;">
                     <p-image [src]="aluno.imagem" alt="Image" [preview]="true" />
@@ -15,7 +15,7 @@
             </p-card>
         </div>
         <div class="info">
-                <div id="container">
+                <div id="animacao">
                     <svg viewBox="0 0 100 100">
                         <circle cx="50" cy="50" r="45" />
                         <path class="checkmark" d="M 25 50 L 43 68 L 75 32" />

@@ -1,11 +1,31 @@
-<div style="display: flex; justify-content: center; margin-top: 500px;">
-    <form (submit)="login($event)">
-        <div>
-            <input type="email" name="email" [(ngModel)]="email">
+<section>
+    <div>
+        <p-button routerLink="/" icon="pi pi-arrow-left" rounded="true" />
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 flex justify-content-center align-items-center form-login">
+                <div class="div-form">
+                    <h3>Central de Acesso</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                    <form (submit)="login($event)">
+                        <div class="input-item">
+                            <label class="label-item">Email*</label>
+                            <input type="email" name="email" [(ngModel)]="email">
+                        </div>
+                        <div class="input-item">
+                            <label class="label-item">Senha*</label>
+                            <input type="password" name="password" [(ngModel)]="password">
+                        </div>
+                        <div>
+                            <button class="button-item">Acessar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-6 justify-content-center align-items-center">
+                <img src="../../../../assets/img/illustration-page-login.svg" alt="">
+            </div>
         </div>
-        <div>
-            <input type="password" name="password" [(ngModel)]="password">
-        </div>
-        <button>Acessar</button>
-    </form>
-</div>
+    </div>
+</section>
