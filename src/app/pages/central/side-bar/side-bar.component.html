@@ -1,0 +1,48 @@
+<section class="portal">
+    <div class="side-bar">
+        <div>
+            <div class="icon">
+                <div>
+                    <i class="pi pi-bars"></i>
+                </div>
+                <div>
+                    icon
+                </div>
+            </div>
+            <ul class="list-side-bar">
+                <li>
+                    <a routerLink="/dashboard" class="bar-item">
+                        <div class="icon-bar">
+                            <i class="pi pi-home"></i>
+                        </div>
+                        <span>Página Principal</span>
+                    </a>
+                </li>
+                <li>
+                    <a routerLink="/lista-alunos" class="bar-item">
+                        <div class="icon-bar">
+                            <i class="pi pi-list"></i>
+                        </div>
+                        <span>Lista de Alunos</span>
+                    </a>
+                </li>
+                <li>
+                    <a routerLink="/cadastrar-alunos" class="bar-item">
+                        <div class="icon-bar">
+                            <i class="pi pi-user-plus"></i>
+                        </div>
+                        <span>Cadastrar Alunos</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="side-bar-logout" (click)="logout()">
+            <div class="bar-item">
+                 <div class="icon-bar">
+                     <i class="pi pi-sign-out"></i>
+                </div>
+                <div>Sair</div>
+            </div>
+        </div>
+    </div>
+</section>
