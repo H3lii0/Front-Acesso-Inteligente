@@ -19,6 +19,8 @@
     "@angular/platform-browser-dynamic": "^17.3.0",
     "@angular/router": "^17.3.0",
     "@lottiefiles/dotlottie-web": "^0.28.0",
+    "bootstrap": "^5.3.3",
+    "bootstrap-icons": "^1.11.3",
     "ngx-loading": "^17.0.0",
     "ngx-spinner": "^17.0.0",
     "primeflex": "^3.3.1",
