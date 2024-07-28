@@ -5,6 +5,8 @@ import { LoginComponent } from './pages/login/login/login.component';
 import { DashboardComponent } from './pages/central/dashboard/dashboard.component';
 import { ListaAlunosComponent } from './pages/alunos/lista-alunos/lista-alunos.component';
 import { CadastrarAlunosComponent } from './pages/alunos/cadastrar-alunos/cadastrar-alunos.component';
+import { RecuperarSenhaComponent } from './pages/login/recuperar-senha/recuperar-senha.component';
+
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -12,5 +14,6 @@ export const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'dashboard', component: DashboardComponent },
     { path: 'lista-alunos', component: ListaAlunosComponent },
-    { path: 'cadastrar-alunos', component: CadastrarAlunosComponent }
+    { path: 'cadastrar-alunos', component: CadastrarAlunosComponent },
+    { path: 'recuperar-senha', component: RecuperarSenhaComponent }
 ];

@@ -1,31 +1,31 @@
 <section>
-    <div>
+    <div style="margin-right: 50px;">
         <p-button routerLink="/" icon="pi pi-arrow-left" rounded="true" />
     </div>
     <div class="container">
-        <div class="row">
-            <div class="col-md-6 flex justify-content-center align-items-center form-login">
-                <div class="div-form">
-                    <h3>Central de Acesso</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                    <form (submit)="login($event)">
-                        <div class="input-item">
-                            <label class="label-item">Email*</label>
-                            <input type="email" name="email" [(ngModel)]="email">
-                        </div>
-                        <div class="input-item">
-                            <label class="label-item">Senha*</label>
-                            <input type="password" name="password" [(ngModel)]="password">
-                        </div>
+            <div class="div-form">
+                <h3>Central de Acesso</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                <form (submit)="login($event)">
+                    <div class="input-item">
+                        <label class="label-item">Email*</label>
+                        <input type="email" name="email" [(ngModel)]="email" required>
+                    </div>
+                    <div class="input-item">
+                        <label class="label-item">Senha*</label>
+                        <input type="password" name="password" [(ngModel)]="password" required>
                         <div>
-                            <button class="button-item">Acessar</button>
+                            <span routerLink="/recuperar-senha">Esqueceu sua senha?</span>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                    <div>
+                        <button class="button-item">Acessar</button>
+                    </div>
+                </form>
             </div>
-            <div class="col-md-6 justify-content-center align-items-center">
-                <img src="../../../../assets/img/illustration-page-login.svg" alt="">
-            </div>
+        <div class="imagem-item">
+            <img src="../../../../assets/img/illustration-page-login.svg" alt="tv monitor com cardenos ao lado">
         </div>
     </div>
+    <p-toast></p-toast>
 </section>

@@ -1,14 +1,21 @@
 section {
     height: 100vh;
+    width: 100vw;
     display: flex;
+    justify-content: center;
     align-items: center;
     font-family: "Poppins", sans-serif;
+}
+
+.container {
+    display: flex;
 }
 
 .div-form {
     max-width: 400px;
     padding: 3rem;
     width: 100%;
+    margin-right: 10rem;
     border-radius: 1rem;
     background-color: white;
     box-shadow: 0 0 8.44444px 0 rgba(0, 0, 0, .06);
@@ -53,4 +60,9 @@ input {
     font-weight: 600;
     border: none;
     border-radius: 10px;
+}
+
+.imagem-item {
+    display: flex;
+    align-items: center;
 }

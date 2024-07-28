@@ -1,69 +1,62 @@
-.portal {
+.fixed-messages {
+    position: fixed; 
+    top: 20px; 
+    right: 20px; 
+    z-index: 9999; 
+    padding: 10px; 
+}
+
+.container {
+    width: 100vw;
     display: flex;
+}
+
+.content-item {
+    width: 60%;
+}
+
+.circulo {
+    position: relative;
     width: 100%;
-    padding: 16px;
-    align-items: stretch;
-    min-height: 100vh;
-    font-family: "Poppins", sans-serif;
-}
-
-.side-bar {
-    overflow-y: auto;
-    overflow-x: hidden;
+    height: 100%;
     display: flex;
-    flex-direction: column;
-}
-
-.icon {
-    padding: 16px;
-    display: inline-flex;
+    justify-content: center;
     align-items: center;
-    margin-bottom: 24px;
+    
 }
 
-.side-bar {
-    width: 18rem;
-    background-color: #09328B;
-    border-radius: 10px;
-    position: fixed;
-    z-index: 999;
-    padding: 14px;
-    height: calc(100% - 32px);
-    min-height: calc(100vh - 32px);
-    transition: all .5s;
-    justify-content: space-between;
+#total {
+    font-family: 'Poppins', sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+}
+svg {
+    width: 20%;
+    height: 20%;
 }
 
-.side-bar li {
-    font-size: 15px;
-    padding: 14px 16px;
-    list-style: none;
+svg circle {
+    fill: none;
+    stroke-width: 5px;
+    stroke-linecap: round;
 }
 
-.side-bar-logout {
-    padding: 14px;
-    cursor: pointer;
-    border-radius: .75rem;
-    background-color: rgba(0, 0, 0, .25);;
+svg circle.bg {
+    stroke: #4e4e4e;
 }
 
-.list-side-bar {
-    padding-left: 0;
+svg circle.meter {
+    stroke: rgb(34, 228, 34);
+    stroke-dashoffset: 300px;
+    stroke-dasharray: 300px;
+    animation: prog 12s linear forwards; 
 }
 
-.bar-item {
-    display: flex;
-    border-radius: .75rem;
-    cursor: pointer;
-    align-items: center;
-    text-decoration: none;
-    color: white;
-}
-
-.icon-bar {
-    display: inline-flex !important;
-    margin-right: 15px;
-    width: 24px;
-    height: 24px;
-    align-items: center;
+@keyframes prog {
+    0% {
+        stroke-dashoffset: 300px;
+    }
+    100% { 
+        stroke-dashoffset: 0;
+    }
 }

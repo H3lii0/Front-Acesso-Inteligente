@@ -14,6 +14,7 @@ export class AuthService {
   private router = inject(Router);
   private http = inject(HttpClient);
   private apiUrl = 'http://127.0.0.1:8000/api/login';
+  private mensagemExibida = false;
 
   constructor() { }
 
@@ -29,6 +30,7 @@ export class AuthService {
     this.usuarioLogado = email;
     this.salvarToken(token);
     this.autenticado.next(true);
+    this.mensagemExibida = false;
   }
 
   private salvarToken(jwt: string): void {
@@ -49,5 +51,15 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
+  usuarioAunteticado(): Observable<boolean> {
+    return this.autenticado.asObservable();
+  }
 
+  exibirMensagem(): boolean {
+    if (!this.mensagemExibida) {
+      this.mensagemExibida = true;
+      return true;
+    }
+    return false;
+  }
 }
