@@ -126,6 +126,7 @@ main {
     padding: 0.4rem;
     background: transparent;
     color: #6B86B6;
+    cursor: pointer;
 }
 
 .main__section2 {
