@@ -5,15 +5,27 @@ import { ListaAlunosComponent } from "../../alunos/lista-alunos/lista-alunos.com
 import { SideBarComponent } from "../side-bar/side-bar.component";
 import { Message } from 'primeng/api';
 import { MessagesModule } from 'primeng/messages';
+import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
+import { HttpClientModule } from '@angular/common/http';
+import { AlunoService } from '../../../services/aluno.service';
+import { Aluno } from '../../../models/aluno.model';
+import { CommonModule } from '@angular/common';
+import { DataFormatadaPipe } from '../../../pipes/data-formatada.pipe';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   imports: [
+    CommonModule,
     RouterLink,
     ListaAlunosComponent,
     SideBarComponent,
-    MessagesModule
+    MessagesModule,
+    TableModule,
+    ButtonModule,
+    HttpClientModule,
+    DataFormatadaPipe
 ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
@@ -22,8 +34,14 @@ export class DashboardComponent implements OnInit {
   title = 'Dashboard'
   messages: Message[] = [];
 
+  alunos: Aluno[] = [];
+
+    first = 0;
+
+    rows = 10;
   constructor (
-    private authService: AuthService
+    private authService: AuthService,
+    private alunoService: AlunoService
   ) {}
 
   ngOnInit(): void {
@@ -33,9 +51,36 @@ export class DashboardComponent implements OnInit {
       }
     });
 
+    this.alunoService.getAluno().subscribe(alunos => (this.alunos = alunos));
+
     // setTimeout(function() {
     //   location.reload();
     //   }, 10000);
+  }
+  
+  next() {
+      this.first = this.first + this.rows;
+  }
+
+  prev() {
+      this.first = this.first - this.rows;
+  }
+
+  reset() {
+      this.first = 0;
+  }
+
+  pageChange(event: { first: number; rows: number; }) {
+      this.first = event.first;
+      this.rows = event.rows;
+  }
+
+  isLastPage(): boolean {
+      return this.alunos ? this.first >= (this.alunos.length - this.rows) : true;
+  }
+
+  isFirstPage(): boolean {
+    return this.alunos ? this.first === 0 : true;
   }
   
   logout() {

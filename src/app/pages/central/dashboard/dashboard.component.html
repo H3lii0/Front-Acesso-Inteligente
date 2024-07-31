@@ -3,14 +3,78 @@
     <div class="container" style="margin-left: 300px;">
         <div class="content-item">
             <h1>{{title}}</h1>
+            <div class="count-animation-item">
+                <h1>Monitor de acesso</h1>
+                <hr>
+                <div class="count-animation-item-detail">
+                    <div>
+                        <svg viewBox="0 0 100 100">
+                            <rect x="0" y="0" width="50" height="50" stroke="transparent" stroke-width="3px" fill="transparent" />
+                            <circle class="bg" cx="50" cy="50" r="40" stroke="" stroke-width="3px" fill="" />
+                            <text id="total" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle">1</text>
+                            <circle id="meter" class="meter" cx="50" cy="50" r="40" />
+                        </svg>
+                    </div>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis, aperiam vel inventore labore quis quae laboriosam reprehenderit blanditiis velit impedit quod consectetur nesciunt neque repellendus nisi aliquid! Optio, hic recusandae!</p>
+                </div>
+            </div>
             <div>
-                <svg viewBox="0 0 100 100">
-                    <rect x="0" y="0" width="50" height="50" stroke="transparent" stroke-width="3px" fill="transparent" />
-                    <circle class="bg" cx="50" cy="50" r="40" stroke="" stroke-width="3px" fill="" /><text id="total" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle">
-                        1
-                    </text>
-                    <circle id="meter" class="meter" cx="50" cy="50" r="40" />
-                </svg>
+                <h2>Lista de acesso</h2>
+                <div class="mb-3">
+                    <p-button 
+                        type="button" 
+                        icon="pi pi-chevron-left" 
+                        (onClick)="prev()" 
+                        [disabled]="isFirstPage()" 
+                        styleClass="p-button-text" />
+                    <p-button 
+                        type="button"
+                        icon="pi pi-refresh" 
+                        (onClick)="reset()" 
+                        styleClass="p-button-text" />
+                    <p-button 
+                        type="button" 
+                        icon="pi pi-chevron-right" 
+                        (onClick)="next()" 
+                        [disabled]="isLastPage()" 
+                        styleClass="p-button-text" />
+                </div>
+                <div class="card">
+                    <p-table
+                        [value]="alunos"
+                        [paginator]="true"
+                        [rows]="rows"
+                        [first]="first"
+                        [showCurrentPageReport]="true"
+                        [tableStyle]="{ 'min-width': '50rem' }"
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                        (onPage)="pageChange($event)"
+                        [rowsPerPageOptions]="[10, 25, 50]"
+                    >
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th style="width:25%">Nome</th>
+                                <th style="width:25%">Data de Nascimento</th>
+                                <th style="width:25%">Sexo</th>
+                                <th style="width:25%">Telefone</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-aluno>
+                            <tr>
+                                <td>{{ aluno.nome }}</td>
+                                <td>{{ aluno.sexo}}</td>
+                                <td>{{ aluno.data_nascimento | dataFormatada }}</td>
+                                <td>{{ aluno.telefone }}</td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="paginatorleft">
+                            <p-button type="button" icon="pi pi-plus" styleClass="p-button-text" />
+                        </ng-template>
+                        <ng-template pTemplate="paginatorright">
+                            <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text" />
+                        </ng-template>
+                    </p-table>
+                </div>
             </div>
         </div>
         <div class="content-right-item">
@@ -25,15 +89,3 @@
         [enableService]="false" />
     </div>
 </section>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        let meterElement = document.getElementById('meter');
-
-        meterElement.addEventListener('animationend', function() {
-            meterElement.classList.remove('meter');
-            void meterElement.offsetWidth;
-            meterElement.classList.add('meter');
-        })
-    })
-</script>
