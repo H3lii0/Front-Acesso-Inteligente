@@ -15,63 +15,40 @@
                             <circle id="meter" class="meter" cx="50" cy="50" r="40" />
                         </svg>
                     </div>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis, aperiam vel inventore labore quis quae laboriosam reprehenderit blanditiis velit impedit quod consectetur nesciunt neque repellendus nisi aliquid! Optio, hic recusandae!</p>
                 </div>
             </div>
             <div>
                 <h2>Lista de acesso</h2>
-                <div class="mb-3">
-                    <p-button 
-                        type="button" 
-                        icon="pi pi-chevron-left" 
-                        (onClick)="prev()" 
-                        [disabled]="isFirstPage()" 
-                        styleClass="p-button-text" />
-                    <p-button 
-                        type="button"
-                        icon="pi pi-refresh" 
-                        (onClick)="reset()" 
-                        styleClass="p-button-text" />
-                    <p-button 
-                        type="button" 
-                        icon="pi pi-chevron-right" 
-                        (onClick)="next()" 
-                        [disabled]="isLastPage()" 
-                        styleClass="p-button-text" />
-                </div>
+            
                 <div class="card">
                     <p-table
-                        [value]="alunos"
+                        [value]="frequencias"
                         [paginator]="true"
-                        [rows]="rows"
-                        [first]="first"
+                        [rows]="perPage"
+                        [first]="page"
+                        [totalRecords]="totalRecords"
+                        [loading]="loading"
                         [showCurrentPageReport]="true"
                         [tableStyle]="{ 'min-width': '50rem' }"
                         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                         (onPage)="pageChange($event)"
-                        [rowsPerPageOptions]="[10, 25, 50]"
+                        [rowsPerPageOptions]="[ 10, 25, 50]"
                     >
                         <ng-template pTemplate="header">
                             <tr>
                                 <th style="width:25%">Nome</th>
-                                <th style="width:25%">Data de Nascimento</th>
-                                <th style="width:25%">Sexo</th>
-                                <th style="width:25%">Telefone</th>
+                                <th style="width:25%">Matricula</th>
+                                <th style="width:25%">Data de acesso</th>
+                                <th style="width:25%">Horário de acesso</th>
                             </tr>
                         </ng-template>
-                        <ng-template pTemplate="body" let-aluno>
+                        <ng-template pTemplate="body" let-frequencia>
                             <tr>
-                                <td>{{ aluno.nome }}</td>
-                                <td>{{ aluno.sexo}}</td>
-                                <td>{{ aluno.data_nascimento | dataFormatada }}</td>
-                                <td>{{ aluno.telefone }}</td>
+                                <td>{{ frequencia.aluno.nome }}</td>
+                                <td>{{ frequencia.aluno.matricula}}</td>
+                                <td>{{ frequencia.data_acesso | dataFormatada }}</td>
+                                <td>{{ frequencia.hora_acesso }}</td>
                             </tr>
-                        </ng-template>
-                        <ng-template pTemplate="paginatorleft">
-                            <p-button type="button" icon="pi pi-plus" styleClass="p-button-text" />
-                        </ng-template>
-                        <ng-template pTemplate="paginatorright">
-                            <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text" />
                         </ng-template>
                     </p-table>
                 </div>

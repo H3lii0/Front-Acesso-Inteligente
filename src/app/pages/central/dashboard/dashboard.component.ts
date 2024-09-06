@@ -12,6 +12,7 @@ import { AlunoService } from '../../../services/aluno.service';
 import { Aluno } from '../../../models/aluno.model';
 import { CommonModule } from '@angular/common';
 import { DataFormatadaPipe } from '../../../pipes/data-formatada.pipe';
+import { Frequencia } from '../../../models/frequencia.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -33,12 +34,13 @@ import { DataFormatadaPipe } from '../../../pipes/data-formatada.pipe';
 export class DashboardComponent implements OnInit {
   title = 'Dashboard'
   messages: Message[] = [];
-
   alunos: Aluno[] = [];
+  frequencias: Frequencia[] = [];
+  page = 0;
+  perPage = 10;
+  totalRecords: number = 0;
+  loading: boolean = true;
 
-    first = 0;
-
-    rows = 10;
   constructor (
     private authService: AuthService,
     private alunoService: AlunoService
@@ -51,36 +53,58 @@ export class DashboardComponent implements OnInit {
       }
     });
 
-    this.alunoService.getAluno().subscribe(alunos => (this.alunos = alunos));
-
-    // setTimeout(function() {
-    //   location.reload();
-    //   }, 10000);
+    this.loadFrequencias(this.page, this.perPage);
+  }
+  
+  loadFrequencias(page: number = 1, perPage: number = 10): void {
+    this.loading = true;
+    this.alunoService.getAlunoFrequencia(this.page, this.perPage).subscribe({
+      next: (response) => {
+        this.frequencias = response.data;
+        this.totalRecords = response.total;
+        this.loading = false;
+      },
+      error: (error) => {
+        console.error('Erro ao carregar frequências:', error);
+        this.loading = false;
+      }
+    });
   }
   
   next() {
-      this.first = this.first + this.rows;
+    if (!this.isLastPage()) {
+      this.page += 1;
+      this.loadFrequencias(this.page, this.perPage);
+    }
   }
-
+    
   prev() {
-      this.first = this.first - this.rows;
+    if (!this.isFirstPage()) {
+      this.page -= 1;
+      this.loadFrequencias(this.page, this.perPage)
+    }
+      this.loadFrequencias(this.page, this.perPage);
   }
 
   reset() {
-      this.first = 0;
+      this.page = 1;
+      this.loadFrequencias(this.page, this.perPage);
   }
 
-  pageChange(event: { first: number; rows: number; }) {
-      this.first = event.first;
-      this.rows = event.rows;
+  pageChange(event: any) {
+    console.log(event)
+      this.page = event.page ? event.page + 1 : 1;
+      console.log(this.page);
+      this.perPage = event.rows;
+      this.loadFrequencias(this.page, this.perPage);
   }
 
   isLastPage(): boolean {
-      return this.alunos ? this.first >= (this.alunos.length - this.rows) : true;
+    return this.page === 1;
   }
 
   isFirstPage(): boolean {
-    return this.alunos ? this.first === 0 : true;
+    return this.page >= Math.ceil(this.totalRecords / this.perPage);
   }
   
   logout() {
