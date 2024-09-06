@@ -2,5 +2,21 @@
     <app-side-bar></app-side-bar>
     <div style="margin-left: 300px;">
         <h1>{{title}}</h1>
+        <p-table [value]="frequencias" [tableStyle]="{ 'min-width': '50rem' }">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-frequencia>
+                <tr>
+                    <td>{{ frequencia.data_acesso }}</td>
+                    <td>{{ frequencia.hora_acesso }}</td>
+                    <td>{{ frequencia.dia_semana }}</td>
+                </tr>
+            </ng-template>
+        </p-table>
     </div>
 </section>
