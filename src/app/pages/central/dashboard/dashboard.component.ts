@@ -13,6 +13,7 @@ import { Aluno } from '../../../models/aluno.model';
 import { CommonModule } from '@angular/common';
 import { DataFormatadaPipe } from '../../../pipes/data-formatada.pipe';
 import { Frequencia } from '../../../models/frequencia.model';
+import { AcessoService } from '../../../services/acesso.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -40,10 +41,12 @@ export class DashboardComponent implements OnInit {
   perPage = 10;
   totalRecords: number = 0;
   loading: boolean = true;
+  totalAcessos: number = 0;
 
   constructor (
     private authService: AuthService,
-    private alunoService: AlunoService
+    private alunoService: AlunoService,
+    private AcessoService: AcessoService
   ) {}
 
   ngOnInit(): void {
@@ -52,8 +55,15 @@ export class DashboardComponent implements OnInit {
         this.messages.push({ severity: 'success', summary: 'Bem-vindo', detail: 'Você está logado!', life: 3000});
       }
     });
-
     this.loadFrequencias(this.page, this.perPage);
+    this.loadTotalAcessos();
+    setInterval(() => this.loadTotalAcessos(), 10000);
+  }
+
+  loadTotalAcessos(): void {
+    this.AcessoService.getTotalAcessos().subscribe(data => {
+      this.totalAcessos = data.total;
+    });
   }
   
   loadFrequencias(page: number = 1, perPage: number = 10): void {
@@ -92,7 +102,6 @@ export class DashboardComponent implements OnInit {
   }
 
   pageChange(event: any) {
-    console.log(event)
       this.page = event.page ? event.page + 1 : 1;
       console.log(this.page);
       this.perPage = event.rows;
