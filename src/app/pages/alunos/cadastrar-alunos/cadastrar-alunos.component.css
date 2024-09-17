@@ -1,0 +1,38 @@
+.cadastroForm {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: "Poppins", sans-serif;
+}
+
+.alunoForm {
+    max-width: 400px;
+    padding: 3rem;
+    width: 100%;
+    border-radius: 1rem;
+    background-color: white;
+    box-shadow: 0 0 8.44444px 0 rgba(0, 0, 0, .06);
+}
+
+form {
+    margin-top: 1rem;
+}
+
+.p-inputtext {
+    width: 100% !important;
+}
+
+.button-item {
+    width: 100%;
+    padding: 10px 20px;
+    background: #09328b;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}

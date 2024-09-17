@@ -3,26 +3,37 @@
         <p-button routerLink="/" icon="pi pi-arrow-left" rounded="true" />
     </div>
     <div class="container">
-            <div class="div-form">
-                <h3>Central de Acesso</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                <form (submit)="login($event)">
-                    <div class="input-item">
-                        <label class="label-item">Email*</label>
-                        <input type="email" name="email" [(ngModel)]="email" required>
-                    </div>
-                    <div class="input-item">
-                        <label class="label-item">Senha*</label>
-                        <input type="password" name="password" [(ngModel)]="password" required>
-                        <div>
-                            <span routerLink="/recuperar-senha">Esqueceu sua senha?</span>
-                        </div>
-                    </div>
+        <div class="div-form">
+            <h3>Central de Acesso</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+
+            <form (submit)="login()">
+                <div class="input-item">
+                    <label class="label-item">Email*</label>
+                    <input type="email" name="email" [(ngModel)]="email" required>
+                </div>
+                <div class="input-item">
+                    <label class="label-item">Senha*</label>
+                    <input type="password" name="password" [(ngModel)]="password" required>
                     <div>
-                        <button class="button-item">Acessar</button>
+                        <span routerLink="/recuperar-senha">Esqueceu sua senha?</span>
                     </div>
-                </form>
-            </div>
+                </div>
+                <div>
+                    <button class="button-item">Acessar</button>
+                </div>
+            </form>
+
+            <p-messages [(value)]="messages"></p-messages> <!-- Exibe as mensagens -->
+
+            <p-dialog header="Sessão Ativa" [(visible)]="sessionActive" [modal]="true">
+                <p>Você tem uma sessão ativa em outro dispositivo. Deseja encerrar a sessão anterior?</p>
+                <p-footer>
+                    <button type="button" pButton label="Encerrar Sessão" (click)="encerrarSessaoAnterior()"></button>
+                    <button type="button" pButton label="Cancelar" (click)="cancelarSessao()"></button>
+                </p-footer>
+            </p-dialog>
+        </div>
         <div class="imagem-item">
             <img src="../../../../assets/img/illustration-page-login.svg" alt="tv monitor com cardenos ao lado">
         </div>

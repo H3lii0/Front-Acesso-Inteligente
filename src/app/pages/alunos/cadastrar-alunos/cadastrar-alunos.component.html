@@ -1,6 +1,54 @@
 <section style="display: flex;">
     <app-side-bar></app-side-bar>
-    <div style="margin-left: 300px;">
+    <div class="cadastroForm" style="margin-left: 300px;">
         <h1>{{title}}</h1>
+        <div class="alunoForm">
+            <form [formGroup]="cadastroForm" (ngSubmit)="cadastrar()">
+                <div class="flex flex-column gap-2">
+                    <label>Matricula</label>
+                    <p-inputNumber inputId="withoutgrouping" formControlName="matricula" [useGrouping]="false"/>
+                </div>
+                <div class="flex flex-column gap-2">
+                    <label>Nome</label>
+                    <input pInputText formControlName="nome" />
+                </div>
+                <div class="flex flex-column gap-2">
+                    <label>Data de nascimento</label>
+                    <p-calendar formControlName="data_nascimento" />
+                </div>
+                <div class=" card flex flex-column gap-2">
+                    <label>Sexo</label>
+                    <span>
+                        <p-selectButton [options]="stateOptions" formControlName="sexo" optionLabel="label"
+                            optionValue="value" />
+                    </span>
+                </div>
+                <div class="flex flex-column gap-2">
+                    <label>Email</label>
+                    <input type="email" pInputText formControlName="email" />
+                </div>
+                <div class="flex flex-column gap-2">
+                    <label>Telefone</label>
+                    <p-inputMask mask="99-999999999" formControlName="telefone" placeholder="(XX)-X-XXXX-XXXX" />
+                </div>
+                <div class="flex flex-column gap-2">
+                    <label>Senha de acesso</label>
+                    <input type="password" pInputText formControlName="senha" />
+                </div>
+                <div class="flex flex-column gap-2">
+                    <label>Curso</label>
+                    <p-dropdown formControlName="curso" [options]="cities" optionLabel="name"
+                        placeholder="Curso" />
+                </div>
+                <div class="flex flex-column gap-2">
+                    <label>Serie</label>
+                    <p-dropdown formControlName="serie" [options]="cities" optionLabel="name"
+                        placeholder="Serie" />
+                </div>
+                <div>
+                    <button type="submit" class="button-item">Cadastrar</button>
+                </div>
+            </form>
+        </div>
     </div>
 </section>
