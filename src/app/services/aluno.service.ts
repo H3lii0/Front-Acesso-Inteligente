@@ -37,4 +37,8 @@ export class AlunoService {
   public validarSenha (id: number, senha: string): Observable<{acessoPermitido: boolean}>{
     return this.http.post<{ acessoPermitido: boolean }>(`${this.apiUrl}aluno/${id}/validar-senha`, {senha}, this.httpOptions)
   }
+
+  public cadastrarAluno(aluno: any):Observable<Aluno[]>  {
+    return this.http.post<Aluno[]>(`${this.apiUrl}aluno`, aluno, this.httpOptions)
+  }
 }
