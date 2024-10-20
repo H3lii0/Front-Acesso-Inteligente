@@ -1,0 +1,91 @@
+.container_formulario {
+    width: 100vw;
+}
+
+.titulo_formulario {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+}
+
+
+.formulario_cadastro_aluno {
+    display: flex;
+    justify-content: center;
+
+}
+
+.teste {
+    padding: 2rem;
+    border-radius: 1rem;
+    background-color: white;
+    box-shadow: 0 0 8.44444px 0 rgba(0, 0, 0, .06);
+}
+
+.input_item {
+    margin-bottom: 1rem;
+}
+
+.label_item {
+    color: #7d858c;
+    font-size: 15px;
+    display: table !important;
+    margin-left: 1px !important;
+    border-radius: 10px;
+}
+
+.label_item_sexo {
+    display: flex;
+    justify-content: center;
+    color: #7d858c;
+    font-size: 15px;
+    margin-left: 1px !important;
+    border-radius: 10px;
+}
+
+input {
+    width: 100%;
+    background-color: transparent !important;
+    border-radius: 6px !important;
+    height: 45px;
+    border: 1px solid #ced4da;
+    font-size: 14px;
+    padding: 10px;
+}
+
+.button_container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.button-item {
+    width: 50%;
+    padding: 10px 20px;
+    background: #09328b;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+input.ng-invalid.ng-dirty {
+    border: 1px solid red; /* Exemplo de estilo de borda para erro */
+    background-color: #ffe6e6; /* Exemplo de cor de fundo para erro */
+}
+
+.error-message {
+    color: red; /* Cor do texto de erro */
+    font-size: 12px; /* Tamanho do texto de erro */
+    margin-top: 1px; /* Espaçamento superior */
+}
+
+::ng-deep .p-inputtext {
+    width: inherit !important;
+}
+
+.pfone {
+width: 320px;
+}

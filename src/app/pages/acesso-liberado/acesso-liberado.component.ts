@@ -42,7 +42,6 @@ export class AcessoLiberadoComponent implements OnInit{
     this.messages = [
       {severity: 'success', detail:'Sucesso!'}
     ]
-    // this.limparMesssagem();
     const idParam = this.route.snapshot.paramMap.get('id');
     const id = idParam ? +idParam : null
 

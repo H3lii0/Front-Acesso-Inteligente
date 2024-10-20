@@ -1,64 +1,122 @@
 <section style="display: flex;">
     <app-side-bar></app-side-bar>
-    <div class="form">
-        <div style="margin-left: 300px;">
+    <div class="container_formulario">
+        <div class="titulo_formulario">
             <h1>{{title}}</h1>
         </div>
-        <div>
-            <form [formGroup]="alunosFormCadastro" (ngSubmit)="cadastrar()">
-                <div>
-                    <label for="matricula">Matricula:</label>
-                    <input id="matricula" type="text" formControlName="matricula">
-                    <div *ngIf="alunosFormCadastro.get('matricula')?.invalid && alunosFormCadastro.get('matricula')?.touched">
-                        Matricula é obrigatória.
+        <div class="formulario_cadastro_aluno">
+            <div class="teste">
+                <form [formGroup]="alunosFormCadastro" (ngSubmit)="cadastrar()">
+                    <div class="input_item">
+                        <label class="label_item" for="matricula"
+                            [style]="{'display': 'flex', 'flex-direction': 'column'}">Matricula</label>
+                        <p-inputNumber inputId="integeronly" formControlName="matricula"
+                            [style]="{'display': 'flex', 'justify-content': 'center', 'width': '320px'}"
+                            [ngClass]="{'ng-invalid ng-dirty': alunosFormCadastro.get('matricula')?.invalid && alunosFormCadastro.get('matricula')?.dirty}" />
+                        <div *ngIf="alunosFormCadastro.get('matricula')?.invalid && alunosFormCadastro.get('matricula')?.touched"
+                            class="error-message">
+                            O número de matricula é obrigatório
+                        </div>
                     </div>
-                </div>
-                <div>
-                    <label for="nome">Nome:</label>
-                    <input id="nome" type="text" formControlName="nome">
-                    <div *ngIf="alunosFormCadastro.get('nome')?.invalid && alunosFormCadastro.get('nome')?.touched">
-                        Nome é obrigatório.
+
+                    <div class="input_item">
+                        <label class="label_item" for="nome">Nome</label>
+                        <input id="nome" type="text" class="ng-invalid ng-dirty" formControlName="nome"
+                            [ngClass]="{'ng-invalid ng-dirty': alunosFormCadastro.get('nome')?.invalid && alunosFormCadastro.get('nome')?.dirty}"
+                            required />
+                        <div *ngIf="alunosFormCadastro.get('nome')?.invalid && alunosFormCadastro.get('nome')?.touched"
+                            class="error-message">
+                            O preenchimento do campo nome é obrigatório
+                        </div>
                     </div>
-                </div>
-                <div>
-                    <label for="sexo">Gênero:</label>
-                    <input id="sexo" type="text" formControlName="sexo">
-                </div>
-                <div>
-                    <label for="data_nascimento">Data de nascimento:</label>
-                    <input id="data_nascimento" type="text" formControlName="data_nascimento">
-                </div>
-                <div>
-                    <label for="email">Email:</label>
-                    <input id="email" type="email" formControlName="email">
-                    <div *ngIf="alunosFormCadastro.get('email')?.invalid && alunosFormCadastro.get('email')?.touched">
-                        Email é obrigatório e deve ser válido.
+
+                    <div class="input_item">
+                        <label class="label_item_sexo" for="sexo">Sexo</label>
+                        <p-selectButton [options]="genderOptions" formControlName="sexo" optionLabel="label"
+                            optionValue="value" [style]="{ 'display': 'flex', 'justify-content': 'center' }"
+                            required="Preencha o campo"  [ngClass]="{'ng-invalid ng-dirty': alunosFormCadastro.get('sexo')?.invalid && alunosFormCadastro.get('sexo')?.dirty}"/>
+                            <div *ngIf="alunosFormCadastro.get('sexo')?.invalid && alunosFormCadastro.get('sexo')?.touched"
+                            class="error-message">
+                            A escolha do sexo é obrigatória
+                        </div>
                     </div>
-                </div>
-                <div>
-                    <label for="telefone">Telefone:</label>
-                    <input id="telefone" type="text" formControlName="telefone">
-                </div>
-                <div>
-                    <label for="senha">Senha de acesso:</label>
-                    <input id="senha" type="text" formControlName="senha">
-                    <div *ngIf="alunosFormCadastro.get('senha')?.invalid && alunosFormCadastro.get('senha')?.touched">
-                        Senha é obrigatória.
+
+                    <div class="input_item">
+                        <label class="label_item" for="data_nascimento">Data de nascimento</label>
+                        <p-calendar formControlName="data_nascimento" [locale]="pt" dateFormat="dd/mm/yy"
+                            [style]="{'display': 'flex', 'justify-content': 'center'}" required="Preencha o campo"  [ngClass]="{'ng-invalid ng-dirty': alunosFormCadastro.get('data_nascimento')?.invalid && alunosFormCadastro.get('data_nascimento')?.dirty}"/>
+                            <div *ngIf="alunosFormCadastro.get('data_nascimento')?.invalid && alunosFormCadastro.get('data_nascimento')?.touched"
+                            class="error-message">
+                            A escolha da data de nascimento é obrigatória
+                        </div>
                     </div>
-                </div>
-                <div>
-                    <label for="curso">Curso:</label>
-                    <input id="curso" type="text" formControlName="curso">
-                </div>
-                <div>
-                    <label for="serie">Série:</label>
-                    <input id="serie" type="text" formControlName="serie">
-                </div>
-                <div>
-                    <button type="submit">Cadastrar</button>
-                </div>
-            </form>
-        
+
+                    <div class="input_item">
+                        <label class="label_item" for="email">Email</label>
+                        <input id="email" type="email" formControlName="email" required [ngClass]="{'ng-invalid ng-dirty': alunosFormCadastro.get('email')?.invalid && alunosFormCadastro.get('email')?.dirty}">
+                        <div *ngIf="alunosFormCadastro.get('email')?.invalid && alunosFormCadastro.get('email')?.touched"
+                            class="error-message">
+                            O preenchimento do campo E-mail é obrigatório
+                        </div>
+                    </div>
+
+                    <div class="input_item">
+                        <label class="label_item" for="telefone">Telefone</label>
+                        <p-inputMask mask="(99) 99999-9999" formControlName="telefone" placeholder="(99) 99999-9999"
+                            class="pfone" [ngClass]="{'ng-invalid ng-dirty': alunosFormCadastro.get('telefone')?.invalid && alunosFormCadastro.get('telefone')?.dirty}"/>
+                            <div *ngIf="alunosFormCadastro.get('telefone')?.invalid && alunosFormCadastro.get('telefone')?.touched"
+                            class="error-message">
+                            O preenchimento do campo telefone é obrigatório
+                        </div>
+                    </div>
+
+                    <div class="input_item">
+                        <label class="label_item" for="senha">Senha de acesso</label>
+                        <p-password formControlName="senha" [style]="{'display': 'flex', 'width': '320px'}" [ngClass]="{'ng-invalid ng-dirty': alunosFormCadastro.get('senha')?.invalid && alunosFormCadastro.get('senha')?.dirty}">
+                            <ng-template pTemplate="header">
+                                <h6>Digite sua senha</h6>
+                            </ng-template>
+                            <ng-template pTemplate="footer">
+                                <p-divider />
+                                <p class="mt-2">Sugestão</p>
+                                <ul class="pl-2 ml-2 mt-0" style="line-height: 1.5">
+                                    <li>Possuir no minino 6 characters</li>
+                                </ul>
+                            </ng-template>
+                        </p-password>
+                        <div *ngIf="alunosFormCadastro.get('senha')?.invalid && alunosFormCadastro.get('senha')?.touched"
+                            class="error-message">
+                            O preenchimento do campo senha é obrigatório
+                        </div>
+                    </div>
+
+                    <div class="input_item">
+                        <label class="label_item" for="curso">Curso</label>
+                        <p-dropdown formControlName="curso" [options]="cursoOptions" optionLabel="name"
+                            optionValue="code" placeholder="Curso"
+                            [style]="{'display': 'flex', 'justidy-content': 'center'}" [ngClass]="{'ng-invalid ng-dirty': alunosFormCadastro.get('curso')?.invalid && alunosFormCadastro.get('curso')?.dirty}"/>
+                            <div *ngIf="alunosFormCadastro.get('curso')?.invalid && alunosFormCadastro.get('curso')?.touched"
+                            class="error-message">
+                            A escolha de um curso é obrigatório
+                        </div>
+                    </div>
+
+                    <div class="input_item">
+                        <label class="label_item" for="serie">Série</label>
+                        <p-dropdown formControlName="serie" [options]="serieOptions" optionLabel="name"
+                            optionValue="code" placeholder="Serie"
+                            [style]="{'display': 'flex', 'justify-content': 'center'}" [ngClass]="{'ng-invalid ng-dirty': alunosFormCadastro.get('serie')?.invalid && alunosFormCadastro.get('serie')?.dirty}"/>
+                            <div *ngIf="alunosFormCadastro.get('serie')?.invalid && alunosFormCadastro.get('serie')?.touched"
+                            class="error-message">
+                            A escolha da serie é obrigatória
+                        </div>
+                    </div>
+
+                    <div class="button_container">
+                        <button class="button-item" type="submit">Cadastrar</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </section>
