@@ -22,8 +22,16 @@ export class AlunoService {
     return this.http.get<Aluno[]>(`${this.apiUrl}aluno`, this.httpOptions)
   }
 
+  public getListaAluno (page: number, perPage: number): Observable<PaginatedResponse<Aluno>> {
+    const params = new HttpParams()
+      .set('page', page.toString())
+      .set('perp_page', perPage.toString());
+
+    return this.http.get<PaginatedResponse<Aluno>>(`${this.apiUrl}aluno`, { params });
+  }
+
   public getAlunoId (id: number): Observable<Aluno> {
-    return this.http.get<Aluno>(`${this.apiUrl}aluno/${id}`, this.httpOptions)
+    return this.http.get<Aluno>(`${this.apiUrl}aluno/${id}`, this.httpOptions);
   }
 
   public getAlunoFrequencia (page: number, perPage: number): Observable<PaginatedResponse<Frequencia>> {

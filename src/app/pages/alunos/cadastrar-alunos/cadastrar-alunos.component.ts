@@ -108,7 +108,7 @@ export class CadastrarAlunosComponent implements OnInit{
 
       this.alunoService.cadastrarAluno(formData).subscribe(
         result => {
-          this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Aluno(a) Cadastro realizado com sucesso' });
+          this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Aluno(a) Cadastrado realizado com sucesso' });
           setTimeout(() => {
             window.location.reload();
           }, 2000);

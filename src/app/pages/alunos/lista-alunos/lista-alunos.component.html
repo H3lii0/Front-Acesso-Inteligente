@@ -2,21 +2,40 @@
     <app-side-bar></app-side-bar>
     <div style="margin-left: 300px;">
         <h1>{{title}}</h1>
-        <p-table [value]="frequencias" [tableStyle]="{ 'min-width': '50rem' }">
-            <ng-template pTemplate="header">
-                <tr>
-                    <th>Code</th>
-                    <th>Name</th>
-                    <th>Category</th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-frequencia>
-                <tr>
-                    <td>{{ frequencia.data_acesso }}</td>
-                    <td>{{ frequencia.hora_acesso }}</td>
-                    <td>{{ frequencia.dia_semana }}</td>
-                </tr>
-            </ng-template>
-        </p-table>
+
+        <div>
+            <p-table
+                [value]="alunos"
+                [paginator]="true"
+                [rows]="perPage"
+                [first]="page"
+                [totalRecords]="totalRecords"
+                [loading]="loading"
+                [showCurrentPageReport]="true"
+                [tableStyle]="{ 'min-width': '50rem' }"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                (onPage)="pageChange($event)"
+                [rowsPerPageOptions]="[ 10, 25, 50 ]"
+            >
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Matricula</th>
+                        <th>Nome</th>
+                        <th>Serie</th>
+                        <th>Curso</th>
+                        <th>Ação</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-aluno>
+                    <tr>
+                        <td>{{ aluno.matricula }}</td>
+                        <td>{{ aluno.nome }}</td>
+                        <td>{{ aluno.serie }}</td>
+                        <td>{{ aluno.curso }}</td>
+                        
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
     </div>
 </section>
