@@ -3,6 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { NgxLoadingModule } from 'ngx-loading';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 

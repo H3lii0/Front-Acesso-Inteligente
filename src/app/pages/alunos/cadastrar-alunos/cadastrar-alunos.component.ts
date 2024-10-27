@@ -11,8 +11,10 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { PasswordModule } from 'primeng/password';
 import { DividerModule } from 'primeng/divider';
-import { Router } from '@angular/router';
 import { InputMaskModule } from 'primeng/inputmask';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+import { RippleModule } from 'primeng/ripple';
 
 @Component({
   selector: 'app-cadastrar-alunos',
@@ -30,10 +32,13 @@ import { InputMaskModule } from 'primeng/inputmask';
     InputNumberModule,
     PasswordModule,
     DividerModule,
-    InputMaskModule
+    InputMaskModule,
+    ToastModule,
+    RippleModule
   ],
   templateUrl: './cadastrar-alunos.component.html',
-  styleUrl: './cadastrar-alunos.component.css'
+  styleUrl: './cadastrar-alunos.component.css',
+  providers: [MessageService]
 })
 export class CadastrarAlunosComponent implements OnInit{
   title = 'Cadastrar Alunos'
@@ -60,7 +65,7 @@ export class CadastrarAlunosComponent implements OnInit{
   constructor (
     private fb: FormBuilder,
     private alunoService: AlunoService,
-    private route: Router
+    private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
@@ -103,10 +108,10 @@ export class CadastrarAlunosComponent implements OnInit{
 
       this.alunoService.cadastrarAluno(formData).subscribe(
         result => {
+          this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Aluno(a) Cadastro realizado com sucesso' });
           setTimeout(() => {
-            this.route.navigate(['/dashboard']);
+            window.location.reload();
           }, 2000);
-          alert('Aluno(a) cadastrado com sucesso!')
         },
         error => {
           console.error('Erro ao cadastrar:', error.error.errors);
@@ -114,9 +119,10 @@ export class CadastrarAlunosComponent implements OnInit{
       );
     } else {
       console.log('Formulário inválido');
+      this.messageService.add({ severity: 'error', summary: 'Atenção', detail: 'Preencha todo o formulário antes de finalizar o cadastro' })
       Object.keys(this.alunosFormCadastro.controls).forEach(field => {
         const control = this.alunosFormCadastro.get(field);
-        control?.markAsDirty;
+        control?.markAsDirty();
       });
     }
   }

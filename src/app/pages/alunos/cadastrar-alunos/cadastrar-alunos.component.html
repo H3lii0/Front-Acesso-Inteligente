@@ -10,9 +10,9 @@
                     <div class="input_item">
                         <label class="label_item" for="matricula"
                             [style]="{'display': 'flex', 'flex-direction': 'column'}">Matricula</label>
-                        <p-inputNumber inputId="integeronly" formControlName="matricula"
+                            <input type="number" formControlName="matricula"
                             [style]="{'display': 'flex', 'justify-content': 'center', 'width': '320px'}"
-                            [ngClass]="{'ng-invalid ng-dirty': alunosFormCadastro.get('matricula')?.invalid && alunosFormCadastro.get('matricula')?.dirty}" />
+                            [ngClass]="{'ng-invalid ng-dirty': alunosFormCadastro.get('matricula')?.invalid && alunosFormCadastro.get('matricula')?.dirty}">
                         <div *ngIf="alunosFormCadastro.get('matricula')?.invalid && alunosFormCadastro.get('matricula')?.touched"
                             class="error-message">
                             O número de matricula é obrigatório
@@ -113,6 +113,10 @@
                     </div>
 
                     <div class="button_container">
+                        <p-toast [showTransformOptions]="'translateY(100%)'" 
+                        [showTransitionOptions]="'1000ms'" 
+                        [hideTransitionOptions]="'1000ms'" 
+                        [showTransformOptions]="'translateX(100%)'"/>
                         <button class="button-item" type="submit">Cadastrar</button>
                     </div>
                 </form>
