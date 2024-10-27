@@ -82,17 +82,17 @@ export class ListaAlunosComponent implements OnInit{
   ngOnInit(): void {
     this.carregarListaAlunos(this.page, this.perPage);
 
-    // this.alunosFormEditar = this.fb.group({
-    //   matricula: ['', Validators.required],
-    //   nome: ['', Validators.required],
-    //   email: ['', [Validators.required, Validators.email]],
-    //   telefone: [''],
-    //   curso: [''],
-    //   serie: [''],
-    //   sexo: [''],
-    //   data_nascimento: [''],
-    //   senha: ['', Validators.required]
-    // });
+    this.alunosFormEditar = this.fb.group({
+      matricula: ['', Validators.required],
+      nome: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      telefone: [''],
+      curso: [''],
+      serie: [''],
+      sexo: [''],
+      data_nascimento: [''],
+      senha: ['', Validators.required]
+    });
   }
 
   carregarListaAlunos(page: number = 1, perPage: number = 10): void {
@@ -145,26 +145,26 @@ export class ListaAlunosComponent implements OnInit{
     return this.page >= Math.ceil(this.totalRecords / this.perPage);
   }
 
-//   modalAlunoEditar(aluno: Aluno) {
-//     this.selectedAluno = { ...aluno }; // Clonar o objeto para evitar referências diretas
-//     this.alunosFormEditar.patchValue({
-//       matricula: aluno.matricula,
-//       nome: aluno.nome,
-//       email: aluno.email,
-//       telefone: aluno.telefone,
-//       curso: aluno.curso,
-//       serie: aluno.serie,
-//       sexo: aluno.sexo,
-//       data_nascimento: aluno.data_nascimento,
-//       senha: '' 
-//     });
-//     this.visible = true; // Abra o diálogo
-// }
+  modalAlunoEditar(aluno: Aluno) {
+    this.selectedAluno = { ...aluno }; // Clonar o objeto para evitar referências diretas
+    this.alunosFormEditar.patchValue({
+      matricula: aluno.matricula,
+      nome: aluno.nome,
+      email: aluno.email,
+      telefone: aluno.telefone,
+      curso: aluno.curso,
+      serie: aluno.serie,
+      sexo: aluno.sexo,
+      data_nascimento: aluno.data_nascimento,
+      senha: '' 
+    });
+    this.visible = true; // Abra o diálogo
+}
 
 
-// salvarEdicao() {
-//     // Lógica para salvar as alterações do aluno
-//     this.visible = false; // Fechar o diálogo após salvar
-//   }
+salvarEdicao() {
+    // Lógica para salvar as alterações do aluno
+    this.visible = false; // Fechar o diálogo após salvar
+  }
 
 }
