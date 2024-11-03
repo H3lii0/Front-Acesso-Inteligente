@@ -39,14 +39,18 @@ export class AlunoService {
       .set('page', page.toString())
       .set('perp_page', perPage.toString());
 
-    return this.http.get<PaginatedResponse<Frequencia>>(`${this.apiUrl}frequencia`, { params })
+    return this.http.get<PaginatedResponse<Frequencia>>(`${this.apiUrl}frequencia`, { params });
   }
 
   public validarSenha (id: number, senha: string): Observable<{acessoPermitido: boolean}>{
-    return this.http.post<{ acessoPermitido: boolean }>(`${this.apiUrl}aluno/${id}/validar-senha`, {senha}, this.httpOptions)
+    return this.http.post<{ acessoPermitido: boolean }>(`${this.apiUrl}aluno/${id}/validar-senha`, {senha}, this.httpOptions);
   }
 
   public cadastrarAluno(aluno: any):Observable<Aluno[]>  {
-    return this.http.post<Aluno[]>(`${this.apiUrl}aluno`, aluno, this.httpOptions)
+    return this.http.post<Aluno[]>(`${this.apiUrl}aluno`, aluno, this.httpOptions);
+  }
+
+  public atualizarAluno(id: number, aluno: Partial<Aluno>): Observable<Aluno>{
+    return this.http.put<Aluno>(`${this.apiUrl}aluno/${id}`, aluno);
   }
 }
