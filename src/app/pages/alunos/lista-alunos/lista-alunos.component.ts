@@ -18,6 +18,8 @@ import { DividerModule } from 'primeng/divider';
 import { InputMaskModule } from 'primeng/inputmask';
 import { ToastModule } from 'primeng/toast';
 import { RippleModule } from 'primeng/ripple';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-lista-alunos',
@@ -40,10 +42,12 @@ import { RippleModule } from 'primeng/ripple';
     DividerModule,
     InputMaskModule,
     ToastModule,
-    RippleModule
+    RippleModule,
+    ButtonModule
   ],
   templateUrl: './lista-alunos.component.html',
-  styleUrl: './lista-alunos.component.css'
+  styleUrl: './lista-alunos.component.css',
+  providers: [MessageService, ConfirmationService]
 })
 export class ListaAlunosComponent implements OnInit {
   title = 'Lista de Alunos'
@@ -54,6 +58,7 @@ export class ListaAlunosComponent implements OnInit {
   loading: boolean = true;
   visible: boolean = false;
   alunosFormEditar!: FormGroup;
+  private isConfirmingDelete = false;
   selectedAluno: Aluno | null = null;
   genderOptions = [
     { label: 'Masculino', value: 'masculino' },
@@ -76,7 +81,9 @@ export class ListaAlunosComponent implements OnInit {
 
   constructor(
     private alunoService: AlunoService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService
   ) { }
 
   ngOnInit(): void {
@@ -107,6 +114,29 @@ export class ListaAlunosComponent implements OnInit {
       today: 'Hoje',
       clear: 'Limpar'
     };
+  }
+
+  confirmDelete(id: number) {
+    if (this.isConfirmingDelete) return;
+    this.isConfirmingDelete = true;
+
+    this.confirmationService.confirm({
+      message: 'Você tem certeza que deseja excluir este registro?',
+      header: 'Confirmação de Exclusão',
+      icon: 'pi pi-info-circle',
+      acceptButtonStyleClass: "p-button-danger p-button-text",
+      rejectButtonStyleClass: "p-button-text p-button-text",
+      acceptIcon: "none",
+      rejectIcon: "none",
+      accept: () => {
+        this.apagarRegistro(id);
+        this.isConfirmingDelete = false;
+      },
+      reject: () => {
+        this.messageService.add({ severity: 'warn', summary: 'Cancelado', detail: 'A exclusão foi cancelada' });
+        this.isConfirmingDelete = false;
+      }
+    });
   }
 
   carregarListaAlunos(page: number = 1, perPage: number = 10): void {
@@ -169,12 +199,12 @@ export class ListaAlunosComponent implements OnInit {
       email: aluno.email,
       telefone: aluno.telefone,
       curso: cursoSelecionado,
-      serie: serieSelecionada, 
+      serie: serieSelecionada,
       sexo: aluno.sexo,
       data_nascimento: new Date(aluno.data_nascimento),
       senha: aluno.senha
     });
-    this.visible = true; 
+    this.visible = true;
   }
 
 
@@ -187,30 +217,42 @@ export class ListaAlunosComponent implements OnInit {
         formData.data_nascimento = formatDate(formData.data_nascimento, 'yyyy-MM-dd', 'en-US');
       }
 
-        const alunoAtualizado: Partial<Aluno> = {
-            matricula: formData.matricula,
-            nome: formData.nome,
-            email: formData.email,
-            telefone: formData.telefone,
-            curso: formData.curso.code,
-            serie: formData.serie.code,
-            sexo: formData.sexo,
-            data_nascimento: formData.data_nascimento,
-            senha: formData.senha,
-        };
+      const alunoAtualizado: Partial<Aluno> = {
+        matricula: formData.matricula,
+        nome: formData.nome,
+        email: formData.email,
+        telefone: formData.telefone,
+        curso: formData.curso.code,
+        serie: formData.serie.code,
+        sexo: formData.sexo,
+        data_nascimento: formData.data_nascimento,
+        senha: formData.senha,
+      };
 
-        this.alunoService.atualizarAluno(this.selectedAluno!.id, alunoAtualizado).subscribe({
-            next: (response) => {
-                this.visible = false;
-                this.carregarListaAlunos(this.page, this.perPage);
-            },
-            error: (error) => {
-                console.error('Erro ao atualizar aluno:', error);
-            }
-        });
+      this.alunoService.atualizarAluno(this.selectedAluno!.id, alunoAtualizado).subscribe({
+        next: (response) => {
+          this.visible = false;
+          this.carregarListaAlunos(this.page, this.perPage);
+        },
+        error: (error) => {
+          console.error('Erro ao atualizar aluno:', error);
+        }
+      });
     }
-}
+  }
 
+  apagarRegistro(id: number) {
+    console.log('chegou na função ');
+    this.alunoService.apagarRegistroAluno(id).subscribe({
+      next: () => {
+        this.alunos = this.alunos.filter(aluno => aluno.id !== id);
+        this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Registro excluído com sucesso' });
+      },
+      error: (err) => {
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Não foi possível excluir o registro' });
+      }
+    });
+  }
 
 
 }

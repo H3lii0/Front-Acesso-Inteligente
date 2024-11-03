@@ -53,4 +53,8 @@ export class AlunoService {
   public atualizarAluno(id: number, aluno: Partial<Aluno>): Observable<Aluno>{
     return this.http.put<Aluno>(`${this.apiUrl}aluno/${id}`, aluno);
   }
+
+  public apagarRegistroAluno(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}aluno/${id}`);
+  }
 }
