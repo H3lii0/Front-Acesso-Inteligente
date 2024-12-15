@@ -6,6 +6,7 @@ import { DashboardComponent } from './pages/central/dashboard/dashboard.componen
 import { ListaAlunosComponent } from './pages/alunos/lista-alunos/lista-alunos.component';
 import { CadastrarAlunosComponent } from './pages/alunos/cadastrar-alunos/cadastrar-alunos.component';
 import { RecuperarSenhaComponent } from './pages/login/recuperar-senha/recuperar-senha.component';
+import { AcessoAlunoHistoricoComponent } from './pages/alunos/acesso-aluno-historico/acesso-aluno-historico.component';
 
 
 export const routes: Routes = [
@@ -15,5 +16,6 @@ export const routes: Routes = [
     { path: 'dashboard', component: DashboardComponent },
     { path: 'lista-alunos', component: ListaAlunosComponent },
     { path: 'cadastrar-alunos', component: CadastrarAlunosComponent },
+    { path: 'acesso-historico-aluno', component: AcessoAlunoHistoricoComponent },
     { path: 'recuperar-senha', component: RecuperarSenhaComponent }
 ];

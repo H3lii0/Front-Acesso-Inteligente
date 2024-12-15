@@ -1,0 +1,50 @@
+<section style="display: flex;">
+    <app-side-bar></app-side-bar>
+    <div class="container_historico">
+        <div class="title">
+            <h1>{{ titulo }}</h1>
+        </div>
+        <div class="historico_acesso_aluno">
+            <div class="tabela_historico">
+                <p-table
+                    [value]="frequencias"
+                    [paginator]="true"
+                    [rows]="perPage"
+                    [first]="page"
+                    [totalRecords]="totalRecords"
+                    [loading]="loading"
+                    [showCurrentPageReport]="true"
+                    [tableStyle]="{ 'min-width': '50rem' }"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                    (onPage)="pageChange($event)"
+                    [rowsPerPageOptions]="[ 10, 25, 50]"
+                >
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th style="width:25%">Nome</th>
+                            <th style="width:25%">Matricula</th>
+                            <th style="width:25%">Serie</th>
+                            <th style="width:25%">Curso</th>
+                            <th style="width:25%">Data de acesso</th>
+                            <th style="width:25%">Horário de acesso</th>
+                            <th style="width:50%">Dia da semana</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-frequencia>
+                        <tr>
+                            <td>{{ frequencia.aluno.nome }}</td>
+                            <td>{{ frequencia.aluno.matricula }}</td>
+                            <td>{{ frequencia.aluno.serie }}</td>
+                            <td>
+                                {{ frequencia.aluno.curso | siglasCursoFormatadas }}
+                            </td>
+                            <td>{{ frequencia.data_acesso | dataFormatada }}</td>
+                            <td>{{ frequencia.hora_acesso }}</td>
+                            <td>{{ frequencia.dia_semana }}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+</section>
