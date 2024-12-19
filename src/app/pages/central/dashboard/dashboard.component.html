@@ -20,42 +20,49 @@
             <div>
                 <h2>Lista de acesso</h2>
             
-                <!-- <div class="card">
-                    <p-table
-                        [value]="frequencias"
-                        [paginator]="true"
-                        [rows]="perPage"
-                        [first]="page"
-                        [totalRecords]="totalRecords"
-                        [loading]="loading"
-                        [showCurrentPageReport]="true"
-                        [tableStyle]="{ 'min-width': '50rem' }"
-                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                        (onPage)="pageChange($event)"
-                        [rowsPerPageOptions]="[ 10, 25, 50]"
-                    >
+                <div class="card">
+                    <p-table #dt1 [value]="frequencias" dataKey="id" [rows]="10" [rowsPerPageOptions]="[10, 25, 50]"
+                        [loading]="loading" [paginator]="true">
                         <ng-template pTemplate="header">
                             <tr>
-                                <th style="width:25%">Nome</th>
-                                <th style="width:25%">Matricula</th>
-                                <th style="width:25%">Data de acesso</th>
-                                <th style="width:25%">Horário de acesso</th>
+                                <th>
+                                    <div class="flex align-items-center">
+                                        Nome do Aluno
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="flex align-items-center">
+                                        Data de Acesso
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="flex align-items-center">
+                                        Hora de Acesso
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="flex align-items-center">
+                                        Dia da Semana
+                                    </div>
+                                </th>
                             </tr>
                         </ng-template>
                         <ng-template pTemplate="body" let-frequencia>
                             <tr>
                                 <td>{{ frequencia.aluno.nome }}</td>
-                                <td>{{ frequencia.aluno.matricula}}</td>
                                 <td>{{ frequencia.data_acesso | dataFormatada }}</td>
                                 <td>{{ frequencia.hora_acesso }}</td>
+                                <td>{{ frequencia.dia_semana }}</td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="emptymessage">
+                            <tr>
+                                <td colspan="4">Nenhum registro encontrado.</td>
                             </tr>
                         </ng-template>
                     </p-table>
-                </div> -->
+                </div>
             </div>
-        </div>
-        <div class="content-right-item">
-            <h1>Conteudo lateral</h1>
         </div>
     </div>
     <div class="fixed-messages">
