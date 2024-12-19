@@ -13,6 +13,7 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { SiglasCursoFormatadasPipe } from "../../../pipes/siglas-curso-formatadas.pipe";
 import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
+import { PrimeNGConfig } from 'primeng/api';
 
 @Component({
   selector: 'app-acesso-aluno-historico',
@@ -30,11 +31,11 @@ import { InputTextModule } from 'primeng/inputtext';
     SiglasCursoFormatadasPipe,
     FormsModule,
     InputTextModule
-],
+  ],
   templateUrl: './acesso-aluno-historico.component.html',
   styleUrl: './acesso-aluno-historico.component.css'
 })
-export class AcessoAlunoHistoricoComponent implements OnInit{
+export class AcessoAlunoHistoricoComponent implements OnInit {
   @ViewChild('dt1') dt1!: Table; // Referência à tabela no template.
 
   titulo = 'Historico de acesso';
@@ -46,89 +47,72 @@ export class AcessoAlunoHistoricoComponent implements OnInit{
   loading: boolean = true;
   searchValue: string | undefined;
 
-    constructor (
-          private alunoService: AlunoService,
-    ) {}
+  constructor(
+    private alunoService: AlunoService,
+    private primengConfig: PrimeNGConfig
+  ) { }
 
-    ngOnInit(): void {
-    // this.loadFrequencias(this.page, this.perPage);
-      
-    // }
+  ngOnInit(): void {
+    this.carregarFrequencias();
+    this.configureTranslations();
+  }
 
-    // loadFrequencias(page: number = 1, perPage: number = 10): void {
-    //   this.loading = true;
-    //   this.alunoService.getAlunosAcessoFrequencia(this.page, this.perPage).subscribe({
-    //     next: (response) => {
-    //       this.frequencias = response.data;
-    //       this.totalRecords = response.total;
-    //       this.loading = false;
-    //     },
-    //     error: (error) => {
-    //       console.error('Erro ao carregar frequências:', error);
-    //       this.loading = false;
-    //     }
-    //   });
-
-      this.carregarFrequencias();
-    }
-
-    carregarFrequencias() {
-        this.loading = true;
-        this.alunoService.getFrequencias(1, 10).subscribe((response) =>{
-          this.frequencias = response.data;
-          this.loading = false;
-        },
-        (error) => {
-          console.error('Erro ao carregar as frequencias:', error);
-          this.loading = false;
-        }
-      )
-    }
-
-    clear(table: Table) {
-      table.clear();
-      this.searchValue = '';
-    }
-
-    applyFilter(event: Event) {
-      const inputElement = event.target as HTMLInputElement; // Fazemos o type assertion aqui.
-      const value = inputElement.value || ''; // Pega o valor do input, ou uma string vazia se for undefined.
-      this.dt1.filterGlobal(value, 'contains');
-    }
+  carregarFrequencias() {
+    this.loading = true;
+    this.alunoService.getFrequencias(1, 10).subscribe({
+      next: (response) => {
+        this.frequencias = response.data.map(frequencia => ({
+          ...frequencia,
+          data_acesso: new Date(frequencia.data_acesso)
+        }));
+        this.loading = false;
+      },
+      error: (error) => {
+        console.error('Erro ao carregar as frequências:', error);
+        this.loading = false;
+      }
+    });
+  }
   
+  configureTranslations() {
+    this.primengConfig.setTranslation({
+      startsWith: 'Começa com',
+      contains: 'Contém',
+      notContains: 'Não contém',
+      endsWith: 'Termina com',
+      equals: 'Igual a',
+      notEquals: 'Diferente de',
+      noFilter: 'Sem filtro',
+      lt: 'Menor que',
+      lte: 'Menor ou igual a',
+      gt: 'Maior que',
+      gte: 'Maior ou igual a',
+      dateIs: 'Data é',
+      dateIsNot: 'Data não é',
+      dateBefore: 'Data antes',
+      dateAfter: 'Data depois',
+      clear: 'Limpar',
+      apply: 'Aplicar',
+      matchAll: 'Corresponder a todos',
+      matchAny: 'Corresponder a qualquer',
+      addRule: 'Adicionar Regra',
+      removeRule: 'Remover Regra',
+      accept: 'Sim',
+      reject: 'Não',
+      choose: 'Escolher',
+      upload: 'Enviar',
+      cancel: 'Cancelar'
+    });
+  }
 
-    // next() {
-    //   if (!this.isLastPage()) {
-    //     this.page += 1;
-    //     this.loadFrequencias(this.page, this.perPage);
-    //   }
-    // }
-      
-    // prev() {
-    //   if (!this.isFirstPage()) {
-    //     this.page -= 1;
-    //     this.loadFrequencias(this.page, this.perPage)
-    //   }
-    //     this.loadFrequencias(this.page, this.perPage);
-    // }
-  
-    // reset() {
-    //     this.page = 1;
-    //     this.loadFrequencias(this.page, this.perPage);
-    // }
-  
-    // pageChange(event: any) {
-    //     this.page = event.page ? event.page + 1 : 1;
-    //     console.log(this.page);
-    //     this.perPage = event.rows;
-    //     this.loadFrequencias(this.page, this.perPage);
-    // }
-  
-    // isLastPage(): boolean {
-    //   return this.page === 1;
-    // }
-  
-    // isFirstPage(): boolean {
-    //   return this.page >= Math.ceil(this.totalRecords / this.perPage);
-    // }
+  clear(table: Table) {
+    table.clear();
+    this.searchValue = '';
+  }
+
+  applyFilter(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    const value = inputElement.value || ''; 
+    this.dt1.filterGlobal(value, 'contains');
+  }
 }

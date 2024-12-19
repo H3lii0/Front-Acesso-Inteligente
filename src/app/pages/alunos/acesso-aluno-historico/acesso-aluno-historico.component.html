@@ -1,10 +1,6 @@
 <section style="display: flex;">
     <app-side-bar></app-side-bar>
     <div class="container_historico">
-        <div class="title">
-            <h1>{{ titulo }}</h1>
-        </div>
-
         <div class="card">
             <p-table #dt1 [value]="frequencias" dataKey="id" [rows]="10" [rowsPerPageOptions]="[10, 25, 50]"
                 [loading]="loading" [paginator]="true"
