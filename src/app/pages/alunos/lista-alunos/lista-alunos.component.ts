@@ -1,7 +1,7 @@
 import { CommonModule, formatDate } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { SideBarComponent } from "../../central/side-bar/side-bar.component";
-import { TableModule } from 'primeng/table';
+import { TableModule, Table } from 'primeng/table';
 import { Aluno } from '../../../models/aluno.model';
 import { AlunoService } from '../../../services/aluno.service';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
@@ -18,8 +18,12 @@ import { DividerModule } from 'primeng/divider';
 import { InputMaskModule } from 'primeng/inputmask';
 import { ToastModule } from 'primeng/toast';
 import { RippleModule } from 'primeng/ripple';
-import { ConfirmationService, MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService, PrimeNGConfig, MenuItem } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
+import { SiglasCursoFormatadasPipe } from '../../../pipes/siglas-curso-formatadas.pipe';
+import { PanelMenuModule } from 'primeng/panelmenu';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { MenuModule } from 'primeng/menu';
 
 @Component({
   selector: 'app-lista-alunos',
@@ -43,23 +47,27 @@ import { ButtonModule } from 'primeng/button';
     InputMaskModule,
     ToastModule,
     RippleModule,
-    ButtonModule
+    ButtonModule,
+    SiglasCursoFormatadasPipe,
+    PanelMenuModule,
+    OverlayPanelModule,
+    MenuModule
   ],
   templateUrl: './lista-alunos.component.html',
   styleUrl: './lista-alunos.component.css',
   providers: [MessageService, ConfirmationService]
 })
 export class ListaAlunosComponent implements OnInit {
+  @ViewChild('dt1') dt1!: Table;
+
   title = 'Lista de Alunos'
   alunos: Aluno[] = [];
-  page = 0;
-  perPage = 10;
-  totalRecords: number = 0;
   loading: boolean = true;
   visible: boolean = false;
   alunosFormEditar!: FormGroup;
   private isConfirmingDelete = false;
   selectedAluno: Aluno | null = null;
+  searchValue: string | undefined;
   genderOptions = [
     { label: 'Masculino', value: 'masculino' },
     { label: 'Feminino', value: 'feminino' }
@@ -78,16 +86,18 @@ export class ListaAlunosComponent implements OnInit {
     { name: 'ADMINISTRAÇÃO', code: 'ADM' }
   ];
   pt: any;
-
+  items: MenuItem[] = [];
   constructor(
     private alunoService: AlunoService,
     private fb: FormBuilder,
     private messageService: MessageService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private primengConfig: PrimeNGConfig
   ) { }
 
   ngOnInit(): void {
-    this.carregarListaAlunos(this.page, this.perPage);
+    this.carregarListaAlunos();
+    this.configureTranslations();
 
     this.alunosFormEditar = this.fb.group({
       matricula: ['', Validators.required],
@@ -116,6 +126,21 @@ export class ListaAlunosComponent implements OnInit {
     };
   }
 
+  getMenuItems(aluno: any): MenuItem[] {
+    return [
+      {
+        label: 'Editar',
+        icon: 'pi pi-user-edit',
+        command: () => this.modalAlunoEditar(aluno)
+      },
+      {
+        label: 'Excluir',
+        icon: 'pi pi-trash',
+        command: () => this.confirmDelete(aluno.id)
+      }
+    ];
+  }
+
   confirmDelete(id: number) {
     if (this.isConfirmingDelete) return;
     this.isConfirmingDelete = true;
@@ -139,53 +164,29 @@ export class ListaAlunosComponent implements OnInit {
     });
   }
 
-  carregarListaAlunos(page: number = 1, perPage: number = 10): void {
+  carregarListaAlunos() {
     this.loading = true;
-    this.alunoService.getListaAluno(this.page, this.perPage).subscribe({
-      next: (response) => {
-        this.alunos = Array.isArray(response.data) ? response.data : [];
-        this.totalRecords = response.total;
+    this.alunoService.getListaAluno(1, 10).subscribe(
+      (response) => {
+        this.alunos = response.data
         this.loading = false;
       },
-      error: (error) => {
+      (error) => {
+        console.error('Erro ao carregar as frequências:', error);
         this.loading = false;
       }
-    })
+    );
   }
 
-  next() {
-    if (!this.isLastPage()) {
-      this.page += 1;
-      this.carregarListaAlunos(this.page, this.perPage);
-    }
+  clear(table: Table) {
+    table.clear();
+    this.searchValue = '';
   }
 
-  prev() {
-    if (!this.isFirstPage()) {
-      this.page -= 1;
-      this.carregarListaAlunos(this.page, this.perPage);
-    }
-    this.carregarListaAlunos(this.page, this.perPage);
-  }
-
-  reset() {
-    this.page = 1;
-    this.carregarListaAlunos(this.page, this.perPage);
-  }
-
-  pageChange(event: any) {
-    this.page = event.page ? event.page + 1 : 1;
-    console.log(this.page);
-    this.perPage = event.rows;
-    this.carregarListaAlunos(this.page, this.perPage);
-  }
-
-  isLastPage(): boolean {
-    return this.page === 1;
-  }
-
-  isFirstPage(): boolean {
-    return this.page >= Math.ceil(this.totalRecords / this.perPage);
+  applyFilter(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    const value = inputElement.value || '';
+    this.dt1.filterGlobal(value, 'contains');
   }
 
   modalAlunoEditar(aluno: Aluno) {
@@ -230,29 +231,59 @@ export class ListaAlunosComponent implements OnInit {
       };
 
       this.alunoService.atualizarAluno(this.selectedAluno!.id, alunoAtualizado).subscribe({
-        next: (response) => {
+        next: () => {
           this.visible = false;
-          this.carregarListaAlunos(this.page, this.perPage);
+          this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Registro do aluno(a) atualizado com sucesso' });
+          this.carregarListaAlunos();
         },
-        error: (error) => {
-          console.error('Erro ao atualizar aluno:', error);
+        error: () => {
+          this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Não foi possível atualizar o registro' });
         }
       });
     }
   }
 
   apagarRegistro(id: number) {
-    console.log('chegou na função ');
     this.alunoService.apagarRegistroAluno(id).subscribe({
       next: () => {
         this.alunos = this.alunos.filter(aluno => aluno.id !== id);
         this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Registro excluído com sucesso' });
       },
-      error: (err) => {
+      error: () => {
         this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Não foi possível excluir o registro' });
       }
     });
   }
 
+  configureTranslations() {
+    this.primengConfig.setTranslation({
+      startsWith: 'Começa com',
+      contains: 'Contém',
+      notContains: 'Não contém',
+      endsWith: 'Termina com',
+      equals: 'Igual a',
+      notEquals: 'Diferente de',
+      noFilter: 'Sem filtro',
+      lt: 'Menor que',
+      lte: 'Menor ou igual a',
+      gt: 'Maior que',
+      gte: 'Maior ou igual a',
+      dateIs: 'Data é',
+      dateIsNot: 'Data não é',
+      dateBefore: 'Data antes',
+      dateAfter: 'Data depois',
+      clear: 'Limpar',
+      apply: 'Aplicar',
+      matchAll: 'Corresponder a todos',
+      matchAny: 'Corresponder a qualquer',
+      addRule: 'Adicionar Regra',
+      removeRule: 'Remover Regra',
+      accept: 'Sim',
+      reject: 'Não',
+      choose: 'Escolher',
+      upload: 'Enviar',
+      cancel: 'Cancelar'
+    });
+  }
 
 }
