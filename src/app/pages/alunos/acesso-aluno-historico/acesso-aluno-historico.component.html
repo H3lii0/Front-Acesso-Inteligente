@@ -8,6 +8,7 @@
                 <ng-template pTemplate="caption">
                     <div class="flex">
                         <p-button label="Limpar filtros" [outlined]="true" icon="pi pi-filter-slash" (onClick)="clear(dt1)" />
+                        <p-button icon="pi pi-file-excel" label="Exportar" (onClick)="exportExcel()" />
                         <span class="p-input-icon-left ml-auto">
                             <i class="pi pi-search"></i>
                             <input pInputText type="text" [(ngModel)]="searchValue"
@@ -15,6 +16,7 @@
                             placeholder="Pesquisar palavra-chave" />
                         </span>
                     </div>
+
                 </ng-template>
                 <ng-template pTemplate="header">
                     <tr>

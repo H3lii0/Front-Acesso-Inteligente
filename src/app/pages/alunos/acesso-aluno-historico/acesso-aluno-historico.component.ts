@@ -14,6 +14,8 @@ import { SiglasCursoFormatadasPipe } from "../../../pipes/siglas-curso-formatada
 import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { PrimeNGConfig } from 'primeng/api';
+import * as xlsx from 'xlsx';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-acesso-aluno-historico',
@@ -115,4 +117,21 @@ export class AcessoAlunoHistoricoComponent implements OnInit {
     const value = inputElement.value || ''; 
     this.dt1.filterGlobal(value, 'contains');
   }
+
+  exportExcel() {
+    const data = this.frequencias.map(f => ({
+        Nome: f.aluno.nome,
+        Turma: f.aluno.serie,
+        Curso: f.aluno.curso,
+        'Data de Acesso': f.data_acesso,
+        'Hora de Acesso': f.hora_acesso,
+        'Dia da Semana': f.dia_semana
+    }));
+
+    const worksheet = xlsx.utils.json_to_sheet(data);
+    const workbook = { Sheets: { 'Dados': worksheet }, SheetNames: ['Dados'] };
+    const excelBuffer: any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
+
+    saveAs(new Blob([excelBuffer], { type: 'application/octet-stream' }), 'relátorio de frequencia.xlsx');
+}
 }
