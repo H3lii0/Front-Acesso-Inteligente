@@ -1,0 +1,115 @@
+.perfil__container {
+    padding: 1rem;
+    border-radius: 1rem;
+    background: #fff;
+    box-shadow: 0 0 8.44444px 0 rgba(0, 0, 0, .06);
+    margin-top: 1rem;
+    width: 35%;
+    height: 45%;
+}
+
+.perfil__profile {
+    text-align: center;
+}
+
+.perfil__profile .perfil__profile__header {
+    width: 100px;
+    height: 100px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(9, 50, 139, .25);
+    color: #09328b;
+    border-radius: 50%;
+    font-size: 3rem;
+}
+
+.informacoes__container {
+    padding: 1rem;
+    border-radius: 1rem;
+    background: #fff;
+    box-shadow: 0 0 8.44444px 0 rgba(0, 0, 0, .06);
+    margin-top: 1rem;
+    width: 56%;
+    height: 80%;
+    margin-left: 2rem;
+}
+
+.informacoes__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.informacoes__aluno {
+    color: #7d858c;
+    font-size: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 3rem;
+    margin-left: 8px !important;
+    margin-bottom: -26px !important;
+    z-index: 99;
+    border-radius: 10px;
+    position: relative;
+
+}
+
+.informacoes__aluno__item {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: 2em;
+}
+
+.informacoes__label {
+    color: #7d858c;
+    font-size: 12px;
+    display: table !important;
+    margin-bottom: -26px !important;
+    margin-left: 8px !important;
+    z-index: 99;
+    border-radius: 10px;
+    position: relative;
+}
+
+.informacoes__label:disabled {
+    background-color: #e9ecef !important;
+    opacity: .5 !important;
+}
+
+#informacoes__aluno-nome {
+    width: 35%;
+}
+
+#informacoes__aluno-email {
+    width: 35%;
+}
+
+#informacoes__aluno-data-nascimento {
+    width: 16%;
+}
+
+#informacoes__aluno-telefone {
+    width: 15%;
+}
+
+#informacoes__aluno-curso {
+    width: 34%;
+}
+
+#informacoes__aluno-turma {
+    width: 22%;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    font-weight: 400;
+    line-height: 1.5;
+    border-radius: 6px !important;
+    height: 52px;
+    border: 1px solid #ced4da;
+    padding: 18px 8px 0 !important;
+    margin-bottom: 12px;
+    font-size: 14px;
+}

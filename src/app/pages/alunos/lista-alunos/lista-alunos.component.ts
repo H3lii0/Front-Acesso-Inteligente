@@ -24,6 +24,7 @@ import { SiglasCursoFormatadasPipe } from '../../../pipes/siglas-curso-formatada
 import { PanelMenuModule } from 'primeng/panelmenu';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { MenuModule } from 'primeng/menu';
+import { TooltipModule } from 'primeng/tooltip';
 
 @Component({
   selector: 'app-lista-alunos',
@@ -51,7 +52,8 @@ import { MenuModule } from 'primeng/menu';
     SiglasCursoFormatadasPipe,
     PanelMenuModule,
     OverlayPanelModule,
-    MenuModule
+    MenuModule,
+    TooltipModule
   ],
   templateUrl: './lista-alunos.component.html',
   styleUrl: './lista-alunos.component.css',

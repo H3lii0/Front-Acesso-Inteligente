@@ -1,0 +1,54 @@
+<section style="display: flex;">
+    <app-side-bar></app-side-bar>
+    <div style="margin-left: 300px; width: 100%; display: flex;">
+        <div class="informacoes__container">
+            <div class="perfil__profile">
+                <div class="perfil__profile__header">
+                    <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar"
+                        class="perfil__profile__header">
+                </div>
+                <hr>
+            </div>
+            <form [formGroup]="informacoesAluno">
+                <div class="informacoes__header">
+                    <h3>Dados do estudande</h3>
+                </div>
+                <hr>
+                <div class="informacoes__aluno">
+                    <div class="informacoes__aluno__item">
+                        <label class="informacoes__label">Matricula</label>
+                        <input class="form-control" type="text" formControlName="matricula">
+                    </div>
+                    <div id="informacoes__aluno-nome" class="informacoes__aluno__item">
+                        <label class="informacoes__label">Nome completo</label>
+                        <input id="form-control-nome" class="form-control" type="text" formControlName="nome">
+                    </div>
+                    <div class="informacoes__aluno__item">
+                        <label class="informacoes__label">Sexo</label>
+                        <input class="form-control" type="text" formControlName="sexo">
+                    </div>
+                    <div id="informacoes__aluno-data-nascimento" class="informacoes__aluno__item">
+                        <label class="informacoes__label">Data de nascimento</label>
+                        <input class="form-control" type="text" formControlName="data_nascimento">
+                    </div>
+                    <div id="informacoes__aluno-telefone" class="informacoes__aluno__item">
+                        <label class="informacoes__label">Celular</label>
+                        <input class="form-control" type="text" formControlName="telefone">
+                    </div>
+                    <div id="informacoes__aluno-email" class="informacoes__aluno__item">
+                        <label class="informacoes__label">Email</label>
+                        <input class="form-control" type="text" formControlName="email">
+                    </div>
+                    <div id="informacoes__aluno-turma" class="informacoes__aluno__item">
+                        <label class="informacoes__label">Turma</label>
+                        <input class="form-control" type="text" formControlName="serie">
+                    </div>
+                    <div id="informacoes__aluno-curso"class="informacoes__aluno__item">
+                        <label class="informacoes__label">Curso</label>
+                        <input class="form-control" type="text" formControlName="curso">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
