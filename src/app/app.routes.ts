@@ -8,16 +8,48 @@ import { CadastrarAlunosComponent } from './pages/alunos/cadastrar-alunos/cadast
 import { RecuperarSenhaComponent } from './pages/login/recuperar-senha/recuperar-senha.component';
 import { AcessoAlunoHistoricoComponent } from './pages/alunos/acesso-aluno-historico/acesso-aluno-historico.component';
 import { AlunoInformacoesDetalheComponent } from './pages/alunos/lista-alunos/aluno-informacoes-detalhe/aluno-informacoes-detalhe.component';
+import { AlunoHistoricoAcessoDetalhadoComponent } from './pages/alunos/acesso-aluno-historico/aluno-historico-acesso-detalhado/aluno-historico-acesso-detalhado.component';
 
 
 export const routes: Routes = [
-    { path: '', component: HomeComponent },
-    { path: 'acesso-liberado', component: AcessoLiberadoComponent },
-    { path: 'login', component: LoginComponent },
-    { path: 'dashboard', component: DashboardComponent },
-    { path: 'lista-alunos', component: ListaAlunosComponent },
-    { path: 'informacoes-aluno-detalhe/:id', component: AlunoInformacoesDetalheComponent },
-    { path: 'cadastrar-alunos', component: CadastrarAlunosComponent },
-    { path: 'acesso-historico-aluno', component: AcessoAlunoHistoricoComponent },
-    { path: 'recuperar-senha', component: RecuperarSenhaComponent }
+    { 
+        path: '', 
+        component: HomeComponent 
+    },
+    { 
+        path: 'acesso-liberado', 
+        component: AcessoLiberadoComponent 
+    },
+    { 
+        path: 'login', 
+        component: LoginComponent 
+    },
+    { 
+        path: 'dashboard', 
+        component: DashboardComponent 
+    },
+    { 
+        path: 'lista-alunos', 
+        component: ListaAlunosComponent 
+    },
+    { 
+        path: 'informacoes-aluno-detalhe/:id', 
+        component: AlunoInformacoesDetalheComponent 
+    },
+    { 
+        path: 'cadastrar-alunos', 
+        component: CadastrarAlunosComponent 
+    },
+    { 
+        path: 'acesso-historico-aluno', 
+        component: AcessoAlunoHistoricoComponent 
+    },
+    { 
+        path: 'recuperar-senha', 
+        component: RecuperarSenhaComponent 
+    },
+    {
+        path: 'historico-aluno-detalhado/:id',
+        component: AlunoHistoricoAcessoDetalhadoComponent
+    }
 ];

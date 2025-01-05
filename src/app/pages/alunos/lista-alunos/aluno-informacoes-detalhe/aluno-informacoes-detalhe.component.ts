@@ -58,7 +58,6 @@ export class AlunoInformacoesDetalheComponent implements OnInit {
   frequencias: Frequencia[] = [];
   informacoesAluno!: FormGroup;
   id?: number | undefined;
-  students: Aluno[] = [];
   loading: boolean = true;
   searchValue: string | undefined;
 

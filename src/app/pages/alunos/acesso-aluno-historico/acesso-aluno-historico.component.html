@@ -60,7 +60,7 @@
                 </ng-template>
                 <ng-template pTemplate="body" let-frequencia>
                     <tr>
-                        <td>{{ frequencia.aluno.nome }}</td>
+                        <td><a routerLinkActive="active" routerLink="/historico-aluno-detalhado/{{frequencia.aluno.id}}">{{ frequencia.aluno.nome }}</a></td>
                         <td>{{ frequencia.aluno.serie }}</td>
                         <td>{{ frequencia.aluno.curso | siglasCursoFormatadas }}</td>
                         <td>{{ frequencia.data_acesso | dataFormatada }}</td>

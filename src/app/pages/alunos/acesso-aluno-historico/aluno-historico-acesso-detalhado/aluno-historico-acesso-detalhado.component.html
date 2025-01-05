@@ -1,0 +1,92 @@
+<section style="display: flex;">
+    <app-side-bar></app-side-bar>
+    <div class="card" style="margin-left: 300px; margin-top: 50px;">
+        <p-table #dt1 [value]="frequencias" dataKey="id" [rows]="10" [rowsPerPageOptions]="[10, 25, 50]"
+            [loading]="loading" [paginator]="true"
+            [globalFilterFields]="['aluno.nome', 'aluno.serie', 'aluno.curso',  'data_acesso', 'dia_semana']">
+            <ng-template pTemplate="caption">
+                <div class="flex">
+                    <p-button label="Limpar filtros" [outlined]="true" icon="pi pi-filter-slash" (onClick)="clear(dt1)" />
+                    <p-button icon="pi pi-file-excel" label="Exportar" (onClick)="exportExcel()" />
+                    <span class="p-input-icon-left ml-auto">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text" [(ngModel)]="searchValue"
+                        (input)="applyFilter($event)"
+                        placeholder="Pesquisar palavra-chave" />
+                    </span>
+                </div>
+
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>
+                        <div class="flex align-items-center">
+                            Matrícula
+                            <p-columnFilter type="text" field="aluno.matricula" display="menu"></p-columnFilter>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="flex align-items-center">
+                            Nome do Aluno
+                            <p-columnFilter type="text" field="aluno.nome" display="menu"></p-columnFilter>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="flex align-items-center">
+                            Telefone
+                            <p-columnFilter type="text" field="aluno.telefone" display="menu"></p-columnFilter>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="flex align-items-center">
+                            Turma
+                            <p-columnFilter type="text" field="serie" display="menu"></p-columnFilter>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="flex align-items-center">
+                            Curso
+                            <p-columnFilter type="text" field="curso" display="menu"></p-columnFilter>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="flex align-items-center">
+                            Data de Acesso
+                            <p-columnFilter type="date" field="data_acesso" display="menu"></p-columnFilter>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="flex align-items-center">
+                            Hora de Acesso
+                            <p-columnFilter type="text" field="hora_acesso" display="menu"></p-columnFilter>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="flex align-items-center">
+                            Dia da Semana
+                            <p-columnFilter type="text" field="dia_semana" display="menu"></p-columnFilter>
+                        </div>
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-frequencia>
+                <tr>
+                    <td>{{ frequencia.aluno.matricula }}</td>
+                    <td>{{ frequencia.aluno.nome }}</td>
+                    <td>{{ frequencia.aluno.telefone }}</td>
+                    <td>{{ frequencia.aluno.serie }}</td>
+                    <td>{{ frequencia.aluno.curso | siglasCursoFormatadas }}</td>
+                    <td>{{ frequencia.data_acesso | dataFormatada }}</td>
+                    <td>{{ frequencia.hora_acesso }}</td>
+                    <td>{{ frequencia.dia_semana }}</td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="6">Nenhum registro encontrado.</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</section>
+
