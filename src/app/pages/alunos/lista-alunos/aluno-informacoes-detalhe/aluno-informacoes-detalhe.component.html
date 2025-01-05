@@ -7,7 +7,6 @@
                     <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar"
                         class="perfil__profile__header">
                 </div>
-                <hr>
             </div>
             <form [formGroup]="informacoesAluno">
                 <div class="informacoes__header">
@@ -49,6 +48,48 @@
                     </div>
                 </div>
             </form>
+        </div>
+        <div class="card">
+            <p-table #dt1 [value]="frequencias" dataKey="id" [rows]="10" [rowsPerPageOptions]="[10, 25, 50]"
+                [loading]="loading" [paginator]="true"
+                [globalFilterFields]="['aluno.nome', 'aluno.serie', 'aluno.curso',  'data_acesso', 'dia_semana']">
+                <ng-template pTemplate="caption">
+                    <div class="flex">
+                        <span class="p-input-icon-left ml-auto">Histórico de acesso</span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>
+                            <div class="flex align-items-center">
+                                Data de Acesso
+                            </div>
+                        </th>
+                        <th>
+                            <div class="flex align-items-center">
+                                Hora de Acesso
+                            </div>
+                        </th>
+                        <th>
+                            <div class="flex align-items-center">
+                                Dia da Semana
+                            </div>
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-frequencia>
+                    <tr>
+                        <td>{{ frequencia.data_acesso | dataFormatada }}</td>
+                        <td>{{ frequencia.hora_acesso }}</td>
+                        <td>{{ frequencia.dia_semana }}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="4">Nenhum registro encontrado.</td>
+                    </tr>
+                </ng-template>
+            </p-table>
         </div>
     </div>
 </section>

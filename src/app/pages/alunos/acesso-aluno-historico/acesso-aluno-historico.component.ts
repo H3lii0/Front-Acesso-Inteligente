@@ -65,7 +65,7 @@ export class AcessoAlunoHistoricoComponent implements OnInit {
       next: (response) => {
         this.frequencias = response.data.map(frequencia => ({
           ...frequencia,
-          data_acesso: new Date(frequencia.data_acesso)
+          data_acesso: frequencia.data_acesso ? new Date(frequencia.data_acesso) : null
         }));
         this.loading = false;
       },
