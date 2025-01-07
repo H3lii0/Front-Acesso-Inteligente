@@ -38,56 +38,26 @@ p {
     border-radius: 12px;
 }
 
-.count-animation-item-detail {
-    display: flex;
-    align-items: center;
-}
 
-.circulo {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-}
-
-#total {
-    font-family: 'Poppins', sans-serif;
-    font-size: 24px;
+  
+  .semana-controle button {
+    margin: 0 10px;
+    padding: 10px 15px;
+    border: none;
+    background-color: #42A5F5;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  .semana-controle button:hover {
+    background-color: #1E88E5;
+  }
+  
+  .semana-controle span {
+    font-size: 18px;
     font-weight: bold;
-}
-
-svg {
-    width: 65%;
-    height: 100%;
-    padding-left: 12px;
-    padding-bottom: 8px;
-}
-
-svg circle {
-    fill: none;
-    stroke-width: 5px;
-    stroke-linecap: round;
-}
-
-svg circle.bg {
-    stroke: #4e4e4e;
-}
-
-svg circle.meter {
-    stroke: rgb(34, 228, 34);
-    stroke-dashoffset: 300px;
-    stroke-dasharray: 300px;
-    animation: prog 12s linear forwards; 
-}
-
-@keyframes prog {
-    0% {
-        stroke-dashoffset: 300px;
-    }
-    100% { 
-        stroke-dashoffset: 0;
-    }
-}
+  }
+  

@@ -26,4 +26,8 @@ export class FrequenciaService {
     return this.http.get<PaginatedResponse<Frequencia>>(`${this.apiUrl}frequenciaAluno/${id}`, this.httpOptions);
   }
   
+  getAcessosPorPeriodo(startDate: string, endDate: string): Observable<any> {
+    // const params = { start_date: startDate, end_date: endDate, group_by: groupBy };
+    return this.http.get<any>(`${this.apiUrl}acessos-por-periodo?start_date=${startDate}&end_date=${endDate}&group_day=day`,this.httpOptions );
+  }
 }
