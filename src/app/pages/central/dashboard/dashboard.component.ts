@@ -137,7 +137,13 @@ export class DashboardComponent implements OnInit {
     this.frequenciaService.getAcessosPorPeriodo(this.startDate, this.endDate).subscribe({
       next: (response) => {
         this.data = {
-          labels: response.data.map((item: any) => item.data),
+          labels: response.data.map((item: any) => {
+            const date = new Date(item.data); 
+            const ajustedDate = new Date(date.getTime() + date.getTimezoneOffset() * 60000);
+            return ajustedDate.toLocaleDateString('pt-BR', { weekday: 'short', month: 'short', day: 'numeric' });
+
+          } 
+        ),
           datasets: [
             {
               label: 'Total de acessos',
